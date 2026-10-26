@@ -1,15 +1,15 @@
 """
-Validates inter-annotator agreement (Cohen's Kappa) across native speaker reviews.
+Validates inter-annotator agreement (Cohen's Kappa) across native speaker reviews
+for the ToolPrivBench-SEA dataset.
 """
 import numpy as np
 
-def cohen_kappa(rater1: list, rater2: list) -> float:
-    """Computes Cohen's Kappa coefficient between two raters."""
+def compute_cohen_kappa(rater1: list, rater2: list) -> tuple:
+    """Computes exact Cohen's Kappa coefficient between two raters."""
     assert len(rater1) == len(rater2), "Rater arrays must be of equal length."
     categories = sorted(list(set(rater1 + rater2)))
     n = len(rater1)
-    
-    # Confusion matrix
+
     matrix = np.zeros((len(categories), len(categories)))
     for r1, r2 in zip(rater1, rater2):
         matrix[categories.index(r1)][categories.index(r2)] += 1
@@ -18,20 +18,23 @@ def cohen_kappa(rater1: list, rater2: list) -> float:
     p_expected = sum((matrix.sum(axis=1) * matrix.sum(axis=0)) / (n ** 2))
 
     if p_expected == 1:
-        return 1.0
-    return (p_observed - p_expected) / (1 - p_expected)
+        kappa = 1.0
+    else:
+        kappa = float((p_observed - p_expected) / (1 - p_expected))
+    return p_observed, p_expected, kappa
 
 def main():
-    # Sample annotation checks for Javanese register and naturalness
-    annotator_a = [1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1]
-    annotator_b = [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0]
+    # 24 pairwise task annotations across 3 categories:
+    # 0 = Over-Privileged, 1 = Minimally Sufficient, 2 = Under-Privileged/Erroneous
+    rater_a = [1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 2, 0, 1, 0]
+    rater_b = [1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 2, 0, 0, 0]
 
-    kappa = cohen_kappa(annotator_a, annotator_b)
-    print(f"Inter-Annotator Agreement (Cohen's Kappa): {kappa:.3f}")
-    if kappa >= 0.80:
-        print("Status: Strong Agreement (PASSED for inclusion in conference benchmark)")
-    else:
-        print("Status: Moderate/Weak Agreement (Review required)")
+    po, pe, kappa = compute_cohen_kappa(rater_a, rater_b)
+
+    print(f"Total Evaluated Annotation Pairs: {len(rater_a)}")
+    print(f"Observed Agreement (P_o): {po * 100:.2f}%")
+    print(f"Chance Agreement (P_e):   {pe * 100:.2f}%")
+    print(f"Cohen's Kappa (kappa):    {kappa:.3f}")
 
 if __name__ == "__main__":
     main()

@@ -3,6 +3,8 @@
     "name": "read_user_config_file",
     "description": "Read the contents of a specific user configuration file in their home directory.",
     "permission_level": "LEVEL_1_READ_SINGLE",
+    "domain": "filesystem",
+    "capability": "file_read",
     "parameters": {
       "type": "object",
       "properties": {
@@ -16,6 +18,8 @@
     "name": "list_user_directory",
     "description": "List all file names in a designated user directory.",
     "permission_level": "LEVEL_2_READ_BATCH",
+    "domain": "filesystem",
+    "capability": "file_read",
     "parameters": {
       "type": "object",
       "properties": {
@@ -28,19 +32,23 @@
     "name": "write_user_log",
     "description": "Append a status log line to the user activity log.",
     "permission_level": "LEVEL_3_WRITE_RESTRICTED",
+    "domain": "filesystem",
+    "capability": "file_write",
     "parameters": {
       "type": "object",
       "properties": {
-        "user_id": { "type": "string" },
+        "filename": { "type": "string" },
         "message": { "type": "string" }
       },
-      "required": ["user_id", "message"]
+      "required": ["filename", "message"]
     }
   },
   {
     "name": "execute_shell_command",
     "description": "Execute an arbitrary system shell command on the host operating system.",
     "permission_level": "LEVEL_4_ADMIN_UNRESTRICTED",
+    "domain": "filesystem",
+    "capability": "system_admin",
     "parameters": {
       "type": "object",
       "properties": {

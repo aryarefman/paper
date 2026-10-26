@@ -13,7 +13,7 @@ def main():
     input_path = Path(args.input_dir)
     records = []
 
-    for file in input_path.glob("*.json"):
+    for file in input_path.glob("benchmark_results_*.json"):
         with open(file, "r", encoding="utf-8") as f:
             data = json.load(f)
             for item in data:
@@ -24,7 +24,7 @@ def main():
         return
 
     summary = BenchmarkMetrics.compute_summary(records)
-    print("\nAGGREGATED BENCHMARK SUMMARY:")
+    print("\nAGGREGATED BENCHMARK SUMMARY (REAL RUN DATA):")
     print(summary.to_string(index=False))
 
     latex_table = BenchmarkMetrics.to_latex_table(summary)

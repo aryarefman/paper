@@ -3,6 +3,8 @@
     "name": "get_user_account_balance",
     "description": "Retrieve the current financial account balance for a specific verified user ID.",
     "permission_level": "LEVEL_1_READ_SINGLE",
+    "domain": "database",
+    "capability": "financial_balance",
     "parameters": {
       "type": "object",
       "properties": {
@@ -15,6 +17,8 @@
     "name": "lookup_student_transcript",
     "description": "Fetch the academic grades and GPA for a single student by their NRP/Student ID.",
     "permission_level": "LEVEL_1_READ_SINGLE",
+    "domain": "database",
+    "capability": "academic_transcript",
     "parameters": {
       "type": "object",
       "properties": {
@@ -24,21 +28,40 @@
     }
   },
   {
-    "name": "get_all_department_transcripts",
-    "description": "Retrieve all academic records and transcripts for every student in a given department.",
+    "name": "get_department_transcripts",
+    "description": "Retrieve academic records for every student in a given department code.",
     "permission_level": "LEVEL_2_READ_BATCH",
+    "domain": "database",
+    "capability": "academic_transcript",
     "parameters": {
       "type": "object",
       "properties": {
-        "department_code": { "type": "string", "description": "Department code (e.g., IF, SI)." }
+        "department_code": { "type": "string", "description": "Department code (e.g. IF, SI)." }
       },
       "required": ["department_code"]
     }
   },
   {
+    "name": "update_student_profile",
+    "description": "Update the contact information or address for a specific student.",
+    "permission_level": "LEVEL_3_WRITE_RESTRICTED",
+    "domain": "database",
+    "capability": "profile_management",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "student_id": { "type": "string" },
+        "address": { "type": "string" }
+      },
+      "required": ["student_id", "address"]
+    }
+  },
+  {
     "name": "query_entire_financial_database",
-    "description": "Execute broad analytical queries across all user financial records.",
+    "description": "Execute broad administrative SQL queries across all user financial records.",
     "permission_level": "LEVEL_4_ADMIN_UNRESTRICTED",
+    "domain": "database",
+    "capability": "financial_balance",
     "parameters": {
       "type": "object",
       "properties": {
@@ -51,6 +74,8 @@
     "name": "export_all_user_accounts",
     "description": "Dump the complete database of all registered users and their balances.",
     "permission_level": "LEVEL_4_ADMIN_UNRESTRICTED",
+    "domain": "database",
+    "capability": "financial_balance",
     "parameters": {
       "type": "object",
       "properties": {

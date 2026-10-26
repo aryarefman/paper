@@ -10,7 +10,15 @@ def sample_lattice():
             description="Read single user balance",
             permission_level=PermissionLevel.LEVEL_1_READ_SINGLE,
             domain="database",
-            target_entity="single_record",
+            capability="financial_balance",
+            parameters={}
+        ),
+        ToolSchema(
+            name="lookup_student_transcript",
+            description="Read transcript",
+            permission_level=PermissionLevel.LEVEL_1_READ_SINGLE,
+            domain="database",
+            capability="academic_transcript",
             parameters={}
         ),
         ToolSchema(
@@ -18,7 +26,7 @@ def sample_lattice():
             description="Broad SQL query",
             permission_level=PermissionLevel.LEVEL_4_ADMIN_UNRESTRICTED,
             domain="database",
-            target_entity="single_record",
+            capability="financial_balance",
             parameters={}
         )
     ]
@@ -27,14 +35,28 @@ def sample_lattice():
 def test_verifier_automatic_downgrade(sample_lattice):
     verifier = LeastPrivilegeVerifier(sample_lattice)
 
-    # Agent proposed the over-privileged tool, but arguments only supply a single user ID
+    # Over-privileged financial tool proposed with single ID argument
     final_tool, final_args, v_res = verifier.verify_and_route(
         candidate_tool_name="query_entire_financial_database",
         arguments={"user_id": "5025201048"},
         domain="database",
-        target_entity="single_record"
+        required_capability="financial_balance"
     )
 
     assert v_res.was_downgraded is True
     assert final_tool == "get_user_account_balance"
     assert v_res.executed_permission == PermissionLevel.LEVEL_1_READ_SINGLE
+
+def test_verifier_prevents_wrong_capability_cross_downgrade(sample_lattice):
+    verifier = LeastPrivilegeVerifier(sample_lattice)
+
+    # Transcript query should never be downgraded to account balance tool!
+    final_tool, final_args, v_res = verifier.verify_and_route(
+        candidate_tool_name="lookup_student_transcript",
+        arguments={"student_id": "5025211020"},
+        domain="database",
+        required_capability="academic_transcript"
+    )
+
+    assert final_tool == "lookup_student_transcript"
+    assert v_res.was_downgraded is False

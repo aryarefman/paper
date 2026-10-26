@@ -1,19 +1,25 @@
 \section{Benchmark Construction: ToolPrivBench-SEA}
 \label{sec:benchmark}
 
-To evaluate cross-lingual over-privilege, we introduce \textsc{ToolPrivBench-SEA}, spanning three functional enterprise domains: database operations, filesystem access, and communication/broadcast services.
+To evaluate cross-lingual over-privilege, we introduce \textsc{ToolPrivBench-SEA}, a parallel multilingual benchmark spanning three functional enterprise domains: relational database management, local filesystem operations, and communication/alert services.
 
-\subsection{Multilingual and Cross-Register Adaptation}
-The benchmark features parallel task descriptions across three language tiers:
+\subsection{Benchmark Structure and Composition}
+The benchmark consists of 12 distinct, functionally grounded task archetypes adapted into three parallel language sets ($N = 36$ total task configurations, evaluated across multiple models and modes yielding 432 executions):
 \begin{enumerate}
-    \item \textbf{English (High-Resource Anchor):} Canonical formulations using direct syntactic imperatives.
-    \item \textbf{Indonesian (Regional Lingua Franca):} Standard Indonesian phrasing reflective of national civic services.
-    \item \textbf{Javanese (Low-Resource Regional Language):} Evaluated across both informal (\textit{Ngoko}) and polite/formal (\textit{Krama}) registers. The honorific nature of \textit{Krama} frequently uses passive nominalizations (e.g., \textit{``Nyuwun tulung dipuntingali...''}), providing an authentic test of model robustness against syntactic ambiguity.
+    \item \textbf{English (High-Resource Anchor):} Canonical formulations using direct syntactic imperatives (e.g., \textit{``Please check the current tuition fee balance for student ID 5025201048''}).
+    \item \textbf{Indonesian (Regional Lingua Franca):} Standard Indonesian phrasing reflective of national public and university civic services.
+    \item \textbf{Javanese (Low-Resource Regional Language):} Formulated across both informal (\textit{Ngoko}) and formal polite (\textit{Krama}) registers. The honorific nature of \textit{Krama} frequently uses passive nominalizations (e.g., \textit{``Nyuwun tulung dipuntingali transkrip biji akademik...''}), providing an authentic evaluation of whether honorific indirectness exacerbates intent ambiguity.
 \end{enumerate}
 
+Importantly, the benchmark includes legitimate single-record reads, legitimate batch operations (e.g., retrieving an entire department's roster where batch read is the minimal sufficient tool), and write/update operations to evaluate whether guardrails can distinguish valid broader permissions from over-privileged traps.
+
 \subsection{Quality Assurance and Inter-Annotator Agreement}
-All translations were reviewed by two independent bilingual annotators. We measured agreement using Cohen's Kappa:
-\begin{equation}
-    \kappa = \frac{P_o - P_e}{1 - P_e}
-\end{equation}
-Annotators achieved $\kappa = 0.88$, confirming strong inter-rater reliability across cultural and register adaptations.
+All task formulations and linguistic adaptations were reviewed through double-blind evaluation by two bilingual native speaker reviewers with computer science backgrounds. Annotators categorized each task across three dimensions: Minimal Sufficiency, Over-Privilege, or Semantic Distortion.
+
+Pairwise evaluation over the benchmark yielded:
+\begin{itemize}
+    \item Observed Percent Agreement ($P_o$): $91.67\%$
+    \item Chance Agreement ($P_e$): $45.14\%$
+    \item Cohen's Kappa ($\kappa$): $0.848$
+\end{itemize}
+According to Landis and Koch guidelines, $\kappa \ge 0.81$ denotes \textit{almost perfect agreement}, confirming the empirical validity of our cross-lingual adaptations.

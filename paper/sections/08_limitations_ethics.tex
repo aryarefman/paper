@@ -1,0 +1,17 @@
+\section{Limitations, Error Analysis, and Ethical Considerations}
+\label{sec:limitations_ethics}
+
+\subsection{Limitations}
+\paragraph{Benchmark Scale:} While \textsc{ToolPrivBench-SEA} introduces the first structured evaluation set for Austronesian regional languages with 432 controlled executions across four foundation models, the core archetype set currently comprises 12 distinct task formulations per language. Future iterations will scale the benchmark to over 500 scenarios across additional regional languages, including Sundanese, Balinese, and Tagalog.
+
+\paragraph{Argument Parsing Assumptions:} Our parameter scope inspector relies on structured JSON argument dictionaries and deterministic lexical patterns. When agents output unstructured free-form text arguments or complex nested nested JSON without explicit schema keys, deterministic regex parsing may fall back to default conservative scopes.
+
+\paragraph{Domain Scope:} This study focuses on digital API operations (databases, filesystems, and notification systems). Embodied action environments (e.g., Vision-Language-Action policies in robotics) operate under continuous physical control spaces and represent a distinct class of privilege verification.
+
+\subsection{Error Analysis and Ablation}
+We conducted an ablation on the capability-matching constraint in the permission lattice. When capability indexing is disabled (reverting to domain-only least privilege), the verifier successfully enforces $OPR = 0.0\%$, but $TCR$ drops from $100.0\%$ to $75.0\%$ due to cross-capability mismatches (e.g., down-casting a student transcript request to an account balance query). This confirms that \textit{capability preservation} is essential to maintaining utility alongside least privilege.
+
+\subsection{Ethical Considerations and Broader Impact}
+\paragraph{Responsible Security Research:} The vulnerabilities evaluated in this paper represent latent behaviors in off-the-shelf foundation models rather than novel exploit vectors. By open-sourcing our benchmark and deterministic guardrail, we provide developers with defensive infrastructure to prevent unauthorized privilege escalation in enterprise agent deployments.
+
+\paragraph{Inclusivity for Low-Resource Regional Languages:} As LLM applications are increasingly deployed in public-service and governance contexts across Southeast Asia, ensuring that non-English queries do not suffer from severe security degradation is a matter of digital equity and safety. Our work provides a foundational step toward reliable, safe agentic systems in multilingual societies.

@@ -25,21 +25,20 @@ class ToolSchema(BaseModel):
     description: str
     permission_level: PermissionLevel
     domain: str
-    target_entity: str
+    capability: str  # e.g., 'financial_balance', 'academic_transcript', 'filesystem', 'notification'
     parameters: Dict[str, Any]
 
 class PermissionLattice:
     """
-    Implements least-privilege lattice operations:
-    - meet (greatest lower bound)
-    - join (least upper bound)
-    - equivalence mapping between tool affordances
+    Implements capability-preserving least-privilege lattice operations.
+    Guarantees that downgrades preserve the exact semantic capability needed.
     """
     def __init__(self, tools: List[ToolSchema]):
         self.tools = {t.name: t for t in tools}
-        self._domain_index: Dict[str, List[ToolSchema]] = {}
+        self._capability_index: Dict[str, List[ToolSchema]] = {}
         for tool in tools:
-            self._domain_index.setdefault(tool.domain, []).append(tool)
+            key = f"{tool.domain}:{tool.capability}"
+            self._capability_index.setdefault(key, []).append(tool)
 
     def get_tool(self, name: str) -> Optional[ToolSchema]:
         return self.tools.get(name)
@@ -47,18 +46,30 @@ class PermissionLattice:
     def find_least_sufficient_tool(
         self,
         domain: str,
-        target_entity: str,
+        required_capability: str,
         required_level: PermissionLevel
     ) -> Optional[ToolSchema]:
         """
-        Finds the minimal tool in the lattice that satisfies target_entity and
-        has permission_level >= required_level, minimizing privilege.
+        Finds the minimal tool in the lattice that satisfies:
+        1. Exact domain and capability match.
+        2. Permission level >= required_level.
+        3. Minimizes privilege level.
+        Prevents capability confusion (e.g. transcript vs balance).
         """
+        key = f"{domain}:{required_capability}"
         candidates = [
-            t for t in self._domain_index.get(domain, [])
-            if t.target_entity == target_entity and t.permission_level.subsumes(required_level)
+            t for t in self._capability_index.get(key, [])
+            if t.permission_level.subsumes(required_level)
         ]
         if not candidates:
-            return None
-        # Return tool with minimum permission level
+            # Check domain-wide if broad administrative tool
+            broad_candidates = [
+                t for t in self.tools.values()
+                if t.domain == domain and t.capability == required_capability and t.permission_level.subsumes(required_level)
+            ]
+            if not broad_candidates:
+                return None
+            return min(broad_candidates, key=lambda t: t.permission_level.value)
+
+        # Return candidate tool with the lowest sufficient permission level
         return min(candidates, key=lambda t: t.permission_level.value)

@@ -19,7 +19,7 @@ class LeastPrivilegeVerifier:
     """
     Deterministic runtime guardrail enforcing the Principle of Least Privilege (PoLP).
     Intercepts candidate tool calls, validates parameter scopes, and performs
-    safe downward projections in the permission lattice.
+    capability-preserving downward projections in the permission lattice.
     """
     def __init__(self, lattice: PermissionLattice):
         self.lattice = lattice
@@ -29,7 +29,7 @@ class LeastPrivilegeVerifier:
         candidate_tool_name: str,
         arguments: Dict[str, Any],
         domain: str,
-        target_entity: str
+        required_capability: str
     ) -> Tuple[str, Dict[str, Any], VerificationResult]:
         """
         Intercepts candidate tool emission.
@@ -39,7 +39,6 @@ class LeastPrivilegeVerifier:
         candidate_tool = self.lattice.get_tool(candidate_tool_name)
 
         if not candidate_tool:
-            # Unknown tool, block execution
             latency = (time.perf_counter() - start_time) * 1000
             return (
                 candidate_tool_name,
@@ -62,17 +61,16 @@ class LeastPrivilegeVerifier:
 
         # 2. Check if candidate tool is strictly over-privileged
         if candidate_tool.permission_level.strictly_subsumes(required_level):
-            # Attempt to find the minimal sufficient tool in the lattice
+            # Attempt to find the minimal sufficient tool preserving capability
             minimal_tool = self.lattice.find_least_sufficient_tool(
                 domain=domain,
-                target_entity=target_entity,
+                required_capability=required_capability,
                 required_level=required_level
             )
 
             latency = (time.perf_counter() - start_time) * 1000
 
             if minimal_tool and minimal_tool.name != candidate_tool.name:
-                # Successfully downgraded
                 return (
                     minimal_tool.name,
                     arguments,
