@@ -49,7 +49,8 @@ class OpenAIAgent(BaseAgent):
 
         # Real API Mode via litellm / openai
         try:
-            import litellm
+            import importlib
+            litellm = importlib.import_module("litellm")
             messages = [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"Available tools: {json.dumps(available_tools)}\n\nUser query: {user_query}"}

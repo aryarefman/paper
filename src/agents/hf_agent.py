@@ -17,8 +17,11 @@ class HuggingFaceAgent(BaseAgent):
     def _lazy_load(self):
         if self.model is None:
             try:
-                import torch
-                from transformers import AutoTokenizer, AutoModelForCausalLM
+                import importlib
+                torch = importlib.import_module("torch")
+                transformers = importlib.import_module("transformers")
+                AutoTokenizer = transformers.AutoTokenizer
+                AutoModelForCausalLM = transformers.AutoModelForCausalLM
                 self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
                 self.model = AutoModelForCausalLM.from_pretrained(
                     self.model_id,
