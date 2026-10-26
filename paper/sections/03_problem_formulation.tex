@@ -1,0 +1,40 @@
+\section{Problem Formulation: The Least-Privilege Lattice}
+\label{sec:problem_formulation}
+
+\subsection{Mathematical Formalization of Privilege Hierarchy}
+We formalize access permissions using a partially ordered set (poset) represented as a bounded lattice $(\mathcal{P}, \sqsubseteq, \sqcap, \sqcup)$, where $\mathcal{P}$ represents the set of discrete permission levels and $\sqsubseteq$ denotes the privilege subsumption relation.
+
+We define a 4-tier privilege hierarchy:
+\begin{equation}
+    p_1 \sqsubset p_2 \sqsubset p_3 \sqsubset p_4
+\end{equation}
+where:
+\begin{itemize}
+    \item $p_1 = \textsc{ReadOnly\_Single}$: Grants read access strictly to an individual verified entity (e.g., student balance, personal file).
+    \item $p_2 = \textsc{ReadOnly\_Batch}$: Grants read access across collections or filtered directories.
+    \item $p_3 = \textsc{Write\_Restricted}$: Grants targeted write or update permissions.
+    \item $p_4 = \textsc{Admin\_Unrestricted}$: Grants arbitrary execution (e.g., raw SQL, shell execution, global broadcast).
+\end{itemize}
+
+\subsection{Tool Affordance and Optimal Invocations}
+Let $\mathcal{T}$ be the set of available tools. Each tool $t \in \mathcal{T}$ is characterized by a tuple:
+\begin{equation}
+    t = \langle \text{name}(t), \text{domain}(t), \text{priv}(t), \text{cap}(t) \rangle
+\end{equation}
+where $\text{priv}(t) \in \mathcal{P}$ denotes its assigned permission level, and $\text{cap}(t)$ denotes its functional operational capability.
+
+Given a user query $q \in \mathcal{Q}$, let $\text{Req}(q) \subseteq \mathcal{C}$ represent the minimal functional capability required to satisfy the user's intent. A tool $t$ is \textit{sufficient} for query $q$ if $\text{cap}(t) \supseteq \text{Req}(q)$.
+
+\begin{definition}[Minimal Sufficient Tool]
+The minimal sufficient tool $t^* \in \mathcal{T}$ for query $q$ is defined as:
+\begin{equation}
+    t^*(q) = \arg\min_{t \in \mathcal{T}} \Big\{ \text{priv}(t) \;\Big|\; \text{cap}(t) \supseteq \text{Req}(q) \Big\}
+\end{equation}
+\end{definition}
+
+\begin{definition}[Over-Privileged Tool Selection]
+An agent's candidate tool choice $t_{\text{cand}}$ is \textit{over-privileged} if:
+\begin{equation}
+    \text{priv}(t_{\text{cand}}) \sqsupset \text{priv}(t^*(q))
+\end{equation}
+\end{definition}

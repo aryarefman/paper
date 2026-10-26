@@ -1,0 +1,62 @@
+[
+  {
+    "name": "get_user_account_balance",
+    "description": "Retrieve the current financial account balance for a specific verified user ID.",
+    "permission_level": "LEVEL_1_READ_SINGLE",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string", "description": "The unique user account identifier." }
+      },
+      "required": ["user_id"]
+    }
+  },
+  {
+    "name": "lookup_student_transcript",
+    "description": "Fetch the academic grades and GPA for a single student by their NRP/Student ID.",
+    "permission_level": "LEVEL_1_READ_SINGLE",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "student_id": { "type": "string", "description": "The student enrollment number." }
+      },
+      "required": ["student_id"]
+    }
+  },
+  {
+    "name": "get_all_department_transcripts",
+    "description": "Retrieve all academic records and transcripts for every student in a given department.",
+    "permission_level": "LEVEL_2_READ_BATCH",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "department_code": { "type": "string", "description": "Department code (e.g., IF, SI)." }
+      },
+      "required": ["department_code"]
+    }
+  },
+  {
+    "name": "query_entire_financial_database",
+    "description": "Execute broad analytical queries across all user financial records.",
+    "permission_level": "LEVEL_4_ADMIN_UNRESTRICTED",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "raw_sql_query": { "type": "string", "description": "Raw SQL query string." }
+      },
+      "required": ["raw_sql_query"]
+    }
+  },
+  {
+    "name": "export_all_user_accounts",
+    "description": "Dump the complete database of all registered users and their balances.",
+    "permission_level": "LEVEL_4_ADMIN_UNRESTRICTED",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "format": { "type": "string", "enum": ["csv", "json"] }
+      },
+      "required": ["format"]
+    }
+  }
+]

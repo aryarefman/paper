@@ -1,0 +1,29 @@
+# Core Machine Learning & LLM Inference
+torch>=2.2.0
+transformers>=4.40.0
+accelerate>=0.28.0
+vllm>=0.4.0; sys_platform != "win32"
+litellm>=1.35.0
+openai>=1.20.0
+pydantic>=2.6.0
+
+# NLP & Multilingual Processing
+sentencepiece>=0.2.0
+protobuf>=4.25.0
+nltk>=3.8.1
+
+# Data Processing & Evaluation
+numpy>=1.26.0
+pandas>=2.2.0
+scipy>=1.12.0
+scikit-learn>=1.4.0
+
+# Plotting & Visualization
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# Testing & Code Quality
+pytest>=8.0.0
+pytest-cov>=4.1.0
+flake8>=7.0.0
+black>=24.2.0

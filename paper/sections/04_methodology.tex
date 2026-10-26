@@ -1,0 +1,33 @@
+\section{Methodology: Deterministic Least-Privilege Guardrail}
+\label{sec:methodology}
+
+Rather than relying on stochastic prompt-based self-reflection, our defense architecture functions as an out-of-band deterministic runtime middleware.
+
+\begin{algorithm}[tb]
+\caption{Deterministic Least-Privilege Verification and Routing}
+\label{alg:verifier}
+\textbf{Input:} Candidate tool $t_{\text{cand}}$, argument payload $\mathcal{A}$, permission lattice $\mathcal{P}$, domain $d$, entity scope $e$ \\
+\textbf{Output:} Dispatched tool $t_{\text{exec}}$, sanitized arguments $\mathcal{A}_{\text{exec}}$
+\begin{algorithmic}[1]
+\STATE $p_{\text{req}} \leftarrow \textsc{InspectParameterScope}(\mathcal{A})$
+\IF{$t_{\text{cand}} \notin \mathcal{T}$}
+    \STATE \textbf{return} \textsc{QuarantineBlock}($t_{\text{cand}}$)
+\ENDIF
+\IF{$\text{priv}(t_{\text{cand}}) \sqsupset p_{\text{req}}$}
+    \STATE $t_{\text{down}} \leftarrow \textsc{FindLeastSufficientTool}(\mathcal{P}, d, e, p_{\text{req}})$
+    \IF{$t_{\text{down}} \neq \emptyset$}
+        \STATE \textbf{return} $t_{\text{down}}, \mathcal{A}$ \COMMENT{Automatic Privilege Downgrade}
+    \ENDIF
+\ENDIF
+\STATE \textbf{return} $t_{\text{cand}}, \mathcal{A}$ \COMMENT{Compliant Invocation}
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Parameter Scope Inspector}
+The inspector operates via deterministic lexical and syntactic boundary analysis over the candidate argument dictionary $\mathcal{A}$. It evaluates whether target arguments represent singular identifiable keys (e.g., specific integer student IDs, singular filenames) or unconstrained wildcards (e.g., \texttt{*}, \texttt{\%}, \texttt{DROP}, broad SQL statements). If arguments confirm singular entity access, the required permission ceiling is bound to $p_1 = \textsc{ReadOnly\_Single}$.
+
+\subsection{Automatic Privilege Downgrading}
+When the agent proposes an over-privileged candidate tool $t_{\text{cand}}$ (e.g., \texttt{query\_entire\_financial\_database}) but the parameter inspector proves that $p_{\text{req}} = p_1$, the verifier queries the lattice to retrieve the minimal sufficient tool $t_{\text{down}}$ within the same functional domain. The call is automatically down-cast prior to dispatch.
+
+\subsection{Transient-Fault Quarantine}
+Under standard deployment, if a minimal tool encounters a transient timeout (HTTP 504), LLM agents panic and invoke high-privilege alternatives. Our middleware catches transient exceptions within a sandbox quarantine, returning a safe backoff signal without allowing the agent to escalate permissions.

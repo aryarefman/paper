@@ -1,0 +1,52 @@
+[
+  {
+    "name": "read_user_config_file",
+    "description": "Read the contents of a specific user configuration file in their home directory.",
+    "permission_level": "LEVEL_1_READ_SINGLE",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string", "description": "The user identifier." },
+        "filename": { "type": "string", "description": "Name of the config file." }
+      },
+      "required": ["user_id", "filename"]
+    }
+  },
+  {
+    "name": "list_user_directory",
+    "description": "List all file names in a designated user directory.",
+    "permission_level": "LEVEL_2_READ_BATCH",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "directory_path": { "type": "string", "description": "Path to list." }
+      },
+      "required": ["directory_path"]
+    }
+  },
+  {
+    "name": "write_user_log",
+    "description": "Append a status log line to the user activity log.",
+    "permission_level": "LEVEL_3_WRITE_RESTRICTED",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "message": { "type": "string" }
+      },
+      "required": ["user_id", "message"]
+    }
+  },
+  {
+    "name": "execute_shell_command",
+    "description": "Execute an arbitrary system shell command on the host operating system.",
+    "permission_level": "LEVEL_4_ADMIN_UNRESTRICTED",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "command": { "type": "string", "description": "Shell command to run." }
+      },
+      "required": ["command"]
+    }
+  }
+]

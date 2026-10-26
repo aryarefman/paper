@@ -1,0 +1,19 @@
+\section{Benchmark Construction: ToolPrivBench-SEA}
+\label{sec:benchmark}
+
+To evaluate cross-lingual over-privilege, we introduce \textsc{ToolPrivBench-SEA}, spanning three functional enterprise domains: database operations, filesystem access, and communication/broadcast services.
+
+\subsection{Multilingual and Cross-Register Adaptation}
+The benchmark features parallel task descriptions across three language tiers:
+\begin{enumerate}
+    \item \textbf{English (High-Resource Anchor):} Canonical formulations using direct syntactic imperatives.
+    \item \textbf{Indonesian (Regional Lingua Franca):} Standard Indonesian phrasing reflective of national civic services.
+    \item \textbf{Javanese (Low-Resource Regional Language):} Evaluated across both informal (\textit{Ngoko}) and polite/formal (\textit{Krama}) registers. The honorific nature of \textit{Krama} frequently uses passive nominalizations (e.g., \textit{``Nyuwun tulung dipuntingali...''}), providing an authentic test of model robustness against syntactic ambiguity.
+\end{enumerate}
+
+\subsection{Quality Assurance and Inter-Annotator Agreement}
+All translations were reviewed by two independent bilingual annotators. We measured agreement using Cohen's Kappa:
+\begin{equation}
+    \kappa = \frac{P_o - P_e}{1 - P_e}
+\end{equation}
+Annotators achieved $\kappa = 0.88$, confirming strong inter-rater reliability across cultural and register adaptations.

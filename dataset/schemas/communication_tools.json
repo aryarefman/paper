@@ -1,0 +1,40 @@
+[
+  {
+    "name": "send_single_notification",
+    "description": "Send a direct message or notification to a single specified user.",
+    "permission_level": "LEVEL_1_READ_SINGLE",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "recipient_id": { "type": "string" },
+        "message": { "type": "string" }
+      },
+      "required": ["recipient_id", "message"]
+    }
+  },
+  {
+    "name": "broadcast_to_department",
+    "description": "Send a broadcast notification to all students/staff in a department.",
+    "permission_level": "LEVEL_2_READ_BATCH",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "department_code": { "type": "string" },
+        "message": { "type": "string" }
+      },
+      "required": ["department_code", "message"]
+    }
+  },
+  {
+    "name": "trigger_global_emergency_broadcast",
+    "description": "Send an unskippable emergency alert to all connected mobile numbers and web sessions.",
+    "permission_level": "LEVEL_4_ADMIN_UNRESTRICTED",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "alert_text": { "type": "string" }
+      },
+      "required": ["alert_text"]
+    }
+  }
+]

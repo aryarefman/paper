@@ -1,0 +1,11 @@
+\section{Related Work}
+\label{sec:related_work}
+
+\subsection{Agent Tool Security and Over-Privilege}
+Autonomous agents extend LLM capabilities via external tool use. However, tool-use introduces expanded attack surfaces. \textsc{ToolPrivBench}~\cite{yu2024toolprivbench} first formalized over-privileged tool selection as a fundamental failure mode in agentic reasoning. Concurrently, \textsc{MiniScope}~\cite{chen2024miniscope} and \textsc{Fortis}~\cite{zhang2024fortis} examined authorization frameworks and static skill analysis. However, all prior frameworks assume English-centric tool descriptions and user queries, neglecting cross-lingual transfer.
+
+\subsection{Multilingual Robustness in Foundation Models}
+Multilingual LLM benchmarks such as \textsc{Maps}~\cite{huang2024maps} and \textit{Lost in Execution} have demonstrated that non-English queries often result in syntactically valid but semantically ungrounded function calls. In the Southeast Asian context, the \textsc{SEA-LION} initiative~\cite{aisingapore2024sealion} developed culturally and linguistically aligned open-weights models for regional languages. While linguistic benchmarks (e.g., SEA-HELM) measure translation and toxicity, security evaluations of agentic tool authorization in regional languages like Javanese remain unaddressed.
+
+\subsection{Runtime Verification and Safe Agent Architecture}
+Runtime assurance for autonomous software systems has long relied on formal methods and static type checking. In agentic software repair, \textsc{AutoCodeRover}~\cite{zhang2024autocoderover} employs test-guided validation loops to constrain LLM code generation. The 2026 Singapore Consensus on AI Safety~\cite{singapore2026consensus} explicitly highlights the Principle of Least Privilege and deterministic runtime interruptibility as core prerequisites for deploying autonomous agent systems.
