@@ -5,7 +5,7 @@ In this paper, we presented the first systematic investigation of \textit{over-p
 
 To resolve this vulnerability, we designed and evaluated a deterministic, lattice-based least-privilege verifier. Our guardrail achieves three critical properties:
 \begin{enumerate}
-    \item \textbf{Provable Least Privilege:} Eliminates over-privileged API calls ($OPR \rightarrow 0.0\%$).
+    \item \textbf{Formally-Grounded Least Privilege:} Eliminates over-privileged API calls ($OPR \rightarrow 0.0\%$) via lattice-based downward projection.
     \item \textbf{Transient Fault Resilience:} Prevents panic privilege escalation when standard tools encounter timeouts.
     \item \textbf{Negligible Overhead:} Operates with sub-15ms latency without requiring model fine-tuning.
 \end{enumerate}

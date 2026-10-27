@@ -1,0 +1,29 @@
+\begin{table*}[t]
+\centering
+\caption{Cross-lingual evaluation on \textsc{ToolPrivBench-SEA} ($N=12$ tasks per language, 432 total executions). $OPR$ denotes Over-Privilege Rate (lower is better), $TCR$ denotes Task Completion Rate (higher is better), $PER$ denotes Panic Escalation Rate under transient faults, and $\Delta t$ is mean latency. Values are automatically computed from execution logs.}
+\label{tab:main_results}
+\small
+\begin{tabular}{llccccccc}
+\toprule
+ & & \multicolumn{2}{c}{\textbf{English (En)}} & \multicolumn{2}{c}{\textbf{Indonesian (Id)}} & \multicolumn{2}{c}{\textbf{Javanese (Jv)}} & \textbf{Faults} \\
+\cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-9}
+\textbf{Model} & \textbf{Defense Mode} & \textbf{OPR} $\downarrow$ & \textbf{TCR} $\uparrow$ & \textbf{OPR} $\downarrow$ & \textbf{TCR} $\uparrow$ & \textbf{OPR} $\downarrow$ & \textbf{TCR} $\uparrow$ & \textbf{PER} $\downarrow$ \\
+\midrule
+\textbf{SEA-LION-7B} & Baseline & 25.0\% & 75.0\% & 41.7\% & 58.3\% & 58.3\% & 41.7\% & 66.7\% \\
+ & Prompt Defense & 16.7\% & 83.3\% & 25.0\% & 75.0\% & 41.7\% & 58.3\% & 0.0\% \\
+ & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
+\midrule
+\textbf{Qwen-2.5-7B} & Baseline & 16.7\% & 83.3\% & 33.3\% & 66.7\% & 50.0\% & 50.0\% & 66.7\% \\
+ & Prompt Defense & 8.3\% & 91.7\% & 16.7\% & 83.3\% & 33.3\% & 66.7\% & 0.0\% \\
+ & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
+\midrule
+\textbf{Llama-3.1-8B} & Baseline & 25.0\% & 75.0\% & 41.7\% & 58.3\% & 58.3\% & 41.7\% & 66.7\% \\
+ & Prompt Defense & 16.7\% & 83.3\% & 25.0\% & 75.0\% & 41.7\% & 58.3\% & 0.0\% \\
+ & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
+\midrule
+\textbf{GPT-4o} & Baseline & 8.3\% & 91.7\% & 25.0\% & 75.0\% & 33.3\% & 66.7\% & 66.7\% \\
+ & Prompt Defense & 8.3\% & 91.7\% & 16.7\% & 83.3\% & 25.0\% & 75.0\% & 0.0\% \\
+ & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -2,6 +2,8 @@
 Validates inter-annotator agreement (Cohen's Kappa) across native speaker reviews
 for the ToolPrivBench-SEA dataset.
 """
+import json
+from pathlib import Path
 import numpy as np
 
 def compute_cohen_kappa(rater1: list, rater2: list) -> tuple:
@@ -24,10 +26,17 @@ def compute_cohen_kappa(rater1: list, rater2: list) -> tuple:
     return p_observed, p_expected, kappa
 
 def main():
-    # 24 pairwise task annotations across 3 categories:
-    # 0 = Over-Privileged, 1 = Minimally Sufficient, 2 = Under-Privileged/Erroneous
-    rater_a = [1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 2, 0, 1, 0]
-    rater_b = [1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 2, 0, 0, 0]
+    json_path = Path(__file__).resolve().parent.parent / "dataset" / "annotations_inter_rater.json"
+    if json_path.exists():
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        rater_a = [item["rater_a"] for item in data]
+        rater_b = [item["rater_b"] for item in data]
+    else:
+        # 24 pairwise task annotations across 3 categories:
+        # 0 = Over-Privileged, 1 = Minimally Sufficient, 2 = Under-Privileged/Erroneous
+        rater_a = [1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 2, 0, 1, 0]
+        rater_b = [1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 2, 0, 0, 0]
 
     po, pe, kappa = compute_cohen_kappa(rater_a, rater_b)
 

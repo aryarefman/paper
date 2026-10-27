@@ -18,8 +18,8 @@ class VerificationResult(BaseModel):
 class LeastPrivilegeVerifier:
     """
     Deterministic runtime guardrail enforcing the Principle of Least Privilege (PoLP).
-    Intercepts candidate tool calls, validates parameter scopes, and performs
-    capability-preserving downward projections in the permission lattice.
+    Intercepts candidate tool emissions, validates parameter scopes, prevents argument smuggling,
+    and performs capability-preserving downward projections in the permission lattice.
     """
     def __init__(self, lattice: PermissionLattice):
         self.lattice = lattice
@@ -28,11 +28,13 @@ class LeastPrivilegeVerifier:
         self,
         candidate_tool_name: str,
         arguments: Dict[str, Any],
-        domain: str,
-        required_capability: str
+        domain: Optional[str] = None,
+        required_capability: Optional[str] = None
     ) -> Tuple[str, Dict[str, Any], VerificationResult]:
         """
         Intercepts candidate tool emission.
+        If domain or required_capability are omitted, they are extracted directly from
+        the candidate tool's schema, avoiding circular evaluation dependence on benchmark labels.
         Returns: (final_tool_name, final_arguments, VerificationResult)
         """
         start_time = time.perf_counter()
@@ -56,15 +58,39 @@ class LeastPrivilegeVerifier:
                 )
             )
 
+        # Decouple from benchmark ground truth: infer domain & capability from candidate tool if not provided
+        effective_domain = domain or candidate_tool.domain
+        effective_capability = required_capability or candidate_tool.capability
+
         # 1. Deterministically infer required scope from argument payload
         required_level = ParameterScopeInspector.infer_required_scope(arguments)
 
-        # 2. Check if candidate tool is strictly over-privileged
+        # 2. Check for Argument Smuggling / Insufficient Tool Privilege:
+        # If the arguments demand higher privilege than the tool possesses, block the execution.
+        if required_level.strictly_subsumes(candidate_tool.permission_level):
+            latency = (time.perf_counter() - start_time) * 1000
+            return (
+                candidate_tool.name,
+                arguments,
+                VerificationResult(
+                    is_intercepted=True,
+                    original_tool=candidate_tool.name,
+                    executed_tool="BLOCKED",
+                    original_permission=candidate_tool.permission_level,
+                    executed_permission=required_level,
+                    was_downgraded=False,
+                    was_blocked=True,
+                    latency_ms=latency,
+                    reason=f"Privilege mismatch: Argument payload demands {required_level.name}, but tool only has {candidate_tool.permission_level.name}."
+                )
+            )
+
+        # 3. Check if candidate tool is strictly over-privileged
         if candidate_tool.permission_level.strictly_subsumes(required_level):
             # Attempt to find the minimal sufficient tool preserving capability
             minimal_tool = self.lattice.find_least_sufficient_tool(
-                domain=domain,
-                required_capability=required_capability,
+                domain=effective_domain,
+                required_capability=effective_capability,
                 required_level=required_level
             )
 

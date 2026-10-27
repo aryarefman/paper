@@ -30,6 +30,7 @@ dependencies = [
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_functions = ["test_*"]
+addopts = "-p no:deepeval"
 
 [tool.black]
 line-length = 100

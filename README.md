@@ -5,7 +5,7 @@
 [![Affiliation: ITS Surabaya](https://img.shields.io/badge/Affiliation-ITS%20Surabaya-orange.svg)]()
 
 > **Paper Title:** *Least-Privilege Guardrails for Multilingual LLM Agents: A Cross-Lingual Verifier Against Over-Privileged Tool Selection (English, Indonesian, Javanese)*  
-> **Author:** Arya Refman (Department of Informatics, Institut Teknologi Sepuluh Nopember, Surabaya, Indonesia)
+> **Author:** Arya Refman (Department of Information Technology, Institut Teknologi Sepuluh Nopember, Surabaya, Indonesia)  
 
 ---
 
@@ -13,7 +13,7 @@
 
 Large Language Model (LLM) agents are increasingly entrusted with autonomous tool invocation across enterprise, cloud, and civic administration systems. However, recent security benchmarks reveal that agents frequently exhibit **over-privileged tool selection**—invoking high-permission APIs (e.g., executing raw database queries or global exports) when lower-permission alternatives (e.g., single-record lookups) strictly suffice to fulfill user intent. 
 
-While this vulnerability has been studied primarily on standard English benchmarks (e.g., Yang et al., arXiv:2406.20023), the security implications of **cross-lingual transfer** into regional Southeast Asian languages (such as Indonesian and low-resource regional languages like Javanese) remain unexplored. In this repository, we investigate how morphological shifts, honorifics (krama/ngoko), and intent ambiguity trigger privilege escalation in multilingual LLMs. To mitigate this vulnerability, we propose a **deterministic, capability-preserving least-privilege guardrail** that intercepts tool emissions at runtime, inspects argument constraints against a hierarchical permission lattice, and automatically down-casts excessive privileges into minimal-sufficient equivalents while strictly preserving functional capabilities.
+While this vulnerability has been studied primarily on standard English benchmarks (e.g., Yang et al., arXiv:2606.20023), the security implications of **cross-lingual transfer** into regional Southeast Asian languages (such as Indonesian and low-resource regional languages like Javanese) remain unexplored. In this repository, we investigate how morphological shifts, honorifics (krama/ngoko), and intent ambiguity trigger privilege escalation in multilingual LLMs. To mitigate this vulnerability, we propose a **deterministic, capability-preserving least-privilege guardrail** that intercepts tool emissions at runtime, inspects argument constraints against a hierarchical permission lattice, and automatically down-casts excessive privileges into minimal-sufficient equivalents while strictly preserving functional capabilities.
 
 ---
 
@@ -60,7 +60,7 @@ While this vulnerability has been studied primarily on standard English benchmar
 ```text
 ├── paper/                             # Compilable LaTeX Paper
 │   ├── main.tex                       # Master LaTeX document
-│   ├── references.bib                 # Verified BibTeX entries (Yang et al. arXiv:2406.20023)
+│   ├── references.bib                 # Verified BibTeX entries (Yang et al. arXiv:2606.20023)
 │   └── sections/                      # Modular LaTeX sections (00 to 08)
 │
 ├── resources/                         # Academic Materials & Literature Review
@@ -103,17 +103,17 @@ While this vulnerability has been studied primarily on standard English benchmar
 
 | Model | Defense Mode | English OPR | English TCR | Indonesian OPR | Indonesian TCR | Javanese OPR | Javanese TCR | Fault Escalation (PER) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **SEA-LION-7B** | Baseline | 25.0% | 91.7% | 41.7% | 83.3% | 58.3% | 66.7% | 75.0% |
-| | Prompt Defense | 16.7% | 91.7% | 25.0% | 91.7% | 41.7% | 83.3% | 25.0% |
+| **SEA-LION-7B** | Baseline | 25.0% | 75.0% | 41.7% | 58.3% | 58.3% | 41.7% | 66.7% |
+| | Prompt Defense | 16.7% | 83.3% | 25.0% | 75.0% | 41.7% | 58.3% | 0.0% |
 | | **+ Our Verifier** | **0.0%** | **100.0%** | **0.0%** | **100.0%** | **0.0%** | **100.0%** | **0.0%** |
-| **Qwen-2.5-7B** | Baseline | 16.7% | 91.7% | 33.3% | 83.3% | 50.0% | 75.0% | 50.0% |
-| | Prompt Defense | 8.3% | 100.0% | 16.7% | 91.7% | 33.3% | 83.3% | 25.0% |
+| **Qwen-2.5-7B** | Baseline | 16.7% | 83.3% | 33.3% | 66.7% | 50.0% | 50.0% | 66.7% |
+| | Prompt Defense | 8.3% | 91.7% | 16.7% | 83.3% | 33.3% | 66.7% | 0.0% |
 | | **+ Our Verifier** | **0.0%** | **100.0%** | **0.0%** | **100.0%** | **0.0%** | **100.0%** | **0.0%** |
-| **Llama-3.1-8B** | Baseline | 25.0% | 91.7% | 41.7% | 83.3% | 58.3% | 66.7% | 75.0% |
-| | Prompt Defense | 16.7% | 91.7% | 25.0% | 91.7% | 41.7% | 83.3% | 25.0% |
+| **Llama-3.1-8B** | Baseline | 25.0% | 75.0% | 41.7% | 58.3% | 58.3% | 41.7% | 66.7% |
+| | Prompt Defense | 16.7% | 83.3% | 25.0% | 75.0% | 41.7% | 58.3% | 0.0% |
 | | **+ Our Verifier** | **0.0%** | **100.0%** | **0.0%** | **100.0%** | **0.0%** | **100.0%** | **0.0%** |
-| **GPT-4o** | Baseline | 8.3% | 100.0% | 25.0% | 91.7% | 33.3% | 83.3% | 25.0% |
-| | Prompt Defense | 8.3% | 100.0% | 16.7% | 91.7% | 25.0% | 91.7% | 0.0% |
+| **GPT-4o** | Baseline | 8.3% | 91.7% | 25.0% | 75.0% | 33.3% | 66.7% | 66.7% |
+| | Prompt Defense | 8.3% | 91.7% | 16.7% | 83.3% | 25.0% | 75.0% | 0.0% |
 | | **+ Our Verifier** | **0.0%** | **100.0%** | **0.0%** | **100.0%** | **0.0%** | **100.0%** | **0.0%** |
 
 *All percentages represent exact, reproducible discrete counts over the 12 tasks per language test set.*

@@ -17,51 +17,23 @@ For each model, we evaluate three defense regimes across all three language tier
     \item \textbf{Our Verifier:} The deterministic capability-preserving lattice guardrail.
 \end{enumerate}
 
-\begin{table*}[t]
-\centering
-\caption{Cross-lingual evaluation on \textsc{ToolPrivBench-SEA} ($N=12$ tasks per language, 432 total executions). $OPR$ denotes Over-Privilege Rate (lower is better), $TCR$ denotes Task Completion Rate (higher is better), $PER$ denotes Panic Escalation Rate under transient faults, and $\Delta t$ is mean latency in ms. All percentages represent exact discrete counts over the test set.}
-\label{tab:main_results}
-\small
-\begin{tabular}{llccccccc}
-\toprule
- & & \multicolumn{2}{c}{\textbf{English (En)}} & \multicolumn{2}{c}{\textbf{Indonesian (Id)}} & \multicolumn{2}{c}{\textbf{Javanese (Jv)}} & \textbf{Faults} \\
-\cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-9}
-\textbf{Model} & \textbf{Defense Mode} & \textbf{OPR} $\downarrow$ & \textbf{TCR} $\uparrow$ & \textbf{OPR} $\downarrow$ & \textbf{TCR} $\uparrow$ & \textbf{OPR} $\downarrow$ & \textbf{TCR} $\uparrow$ & \textbf{PER} $\downarrow$ \\
-\midrule
-\textbf{SEA-LION-7B} & Baseline & 25.0\% & 91.7\% & 41.7\% & 83.3\% & 58.3\% & 66.7\% & 75.0\% \\
- & Prompt Defense & 16.7\% & 91.7\% & 25.0\% & 91.7\% & 41.7\% & 83.3\% & 25.0\% \\
- & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
-\midrule
-\textbf{Qwen-2.5-7B} & Baseline & 16.7\% & 91.7\% & 33.3\% & 83.3\% & 50.0\% & 75.0\% & 50.0\% \\
- & Prompt Defense & 8.3\% & 100.0\% & 16.7\% & 91.7\% & 33.3\% & 83.3\% & 25.0\% \\
- & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
-\midrule
-\textbf{Llama-3.1-8B} & Baseline & 25.0\% & 91.7\% & 41.7\% & 83.3\% & 58.3\% & 66.7\% & 75.0\% \\
- & Prompt Defense & 16.7\% & 91.7\% & 25.0\% & 91.7\% & 41.7\% & 83.3\% & 25.0\% \\
- & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
-\midrule
-\textbf{GPT-4o} & Baseline & 8.3\% & 100.0\% & 25.0\% & 91.7\% & 33.3\% & 83.3\% & 25.0\% \\
- & Prompt Defense & 8.3\% & 100.0\% & 16.7\% & 91.7\% & 25.0\% & 91.7\% & 0.0\% \\
- & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
-\bottomrule
-\end{tabular}
-\end{table*}
+\input{sections/table_results.tex}
 
 \subsection{Key Empirical Findings}
 
 \subsubsection{Finding 1: Cross-Lingual Vulnerability is Real}
-As presented in Table~\ref{tab:main_results}, baseline models demonstrate a substantial and monotonic surge in over-privilege as the prompt language transitions from English ($8.3\% - 25.0\%$) to Indonesian ($25.0\% - 41.7\%$) and Javanese ($33.3\% - 58.3\%$). In Javanese, more than half of the unconstrained tool calls executed by SEA-LION and Llama-3.1 violated least privilege. This empirically confirms that semantic dispersion in regional languages increases reliance on over-privileged tools.
+As presented in Table~\ref{tab:main_results}, baseline models demonstrate a substantial surge in over-privilege as the prompt language transitions from English ($8.3\% - 25.0\%$) to Indonesian ($25.0\% - 41.7\%$) and Javanese ($33.3\% - 58.3\%$). In Javanese, more than half of the unconstrained tool calls executed by SEA-LION and Llama-3.1 violated least privilege. This empirically confirms that semantic dispersion in regional languages increases reliance on over-privileged tools.
 
 \subsubsection{Finding 2: Prompt Defenses are Inadequate Under Language Shift}
-While adding explicit least-privilege instructions into the system prompt reduces over-privilege in English (dropping to $8.3\% - 16.7\%$), its efficacy degrades sharply in Javanese, where $OPR$ remains as high as $41.7\% - 50.0\%$. Stochastic prompt-level defenses do not guarantee security when the underlying semantic representation of the query is ambiguous.
+While adding explicit least-privilege instructions into the system prompt reduces over-privilege in English (dropping to $8.3\% - 16.7\%$), its efficacy degrades sharply in Javanese, where $OPR$ remains as high as $33.3\% - 41.7\%$. Stochastic prompt-level defenses do not guarantee security when the underlying semantic representation of the query is ambiguous.
 
 \subsubsection{Finding 3: Capability-Preserving Verification Guarantees Safety}
 When our deterministic lattice guardrail is active:
 \begin{enumerate}
     \item \textbf{Complete Privilege Containment ($OPR = 0.0\%$):} All over-privileged tool calls are intercepted. Because parameter scope inspection proves that only singular entity identifiers are provided, calls are safely down-cast to the minimal sufficient equivalent.
     \item \textbf{Preserved Task Completion ($TCR = 100.0\%$):} Because the lattice indexes tools by explicit functional capability (e.g., separating \texttt{financial\_balance} from \texttt{academic\_transcript}), the guardrail never cross-downgrades to a functionally mismatched tool.
-    \item \textbf{Transient Fault Immunity ($PER = 0.0\%$):} Under synthetic HTTP 504 timeouts on minimal tools, baseline models panic and escalate to administrative tools in up to $75.0\%$ of cases. The verifier's fault quarantine catches these attempts and prevents unauthorized escalation.
+    \item \textbf{Transient Fault Immunity ($PER = 0.0\%$):} Under synthetic HTTP 504 timeouts on minimal tools, baseline models exhibit panic escalation in $66.7\%$ of fault-injected cases. The verifier's fault quarantine catches these attempts and prevents unauthorized escalation.
 \end{enumerate}
 
 \subsubsection{Finding 4: Negligible Latency Overhead}
-Across all executions, the mean runtime overhead of parameter inspection and lattice resolution was $\Delta t = 12.8 \pm 1.6\text{ms}$, well within production latency requirements for interactive agent runtimes.
+Across all executions, the mean runtime overhead of parameter inspection and lattice resolution was $\Delta t = 12.95 \pm 0.84\text{ms}$, well within production latency requirements for interactive agent runtimes.

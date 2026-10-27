@@ -41,5 +41,5 @@ To ensure high empirical validity:
 2. **Register Verification:** Javanese tasks are reviewed across common colloquial registers (*ngoko*) and formal polite registers (*krama*).
 3. **Inter-Annotator Agreement:** Quality is assessed using **Cohen's Kappa ($\kappa$)** across two independent native speaker annotators:
    * Observed Agreement ($P_o$): **91.67%**
-   * Chance Agreement ($P_e$): **45.14%**
-   * Cohen's Kappa ($\kappa$): **0.848** (Almost perfect agreement)
+   * Chance Agreement ($P_e$): **53.12%**
+   * Cohen's Kappa ($\kappa$): **0.822** (Almost perfect agreement, Landis & Koch $\ge 0.81$)

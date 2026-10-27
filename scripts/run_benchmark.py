@@ -1,9 +1,15 @@
 import argparse
 import json
 import os
+import sys
 import time
 from typing import List, Dict, Any
 from pathlib import Path
+
+# Ensure root directory in sys.path
+root_dir = Path(__file__).resolve().parent.parent
+if str(root_dir) not in sys.path:
+    sys.path.insert(0, str(root_dir))
 
 from src.config import config
 from src.core.lattice import PermissionLattice, ToolSchema, PermissionLevel
@@ -125,11 +131,11 @@ def main():
                 executed_args = selected_args
 
                 if use_verifier:
+                    # Deterministic verifier operates solely on candidate tool and arguments,
+                    # inferring domain and capability directly from tool schema without ground truth leakage
                     final_tool, final_args, v_res = verifier.verify_and_route(
                         candidate_tool_name=selected_tool_name,
-                        arguments=selected_args,
-                        domain=task["domain"],
-                        required_capability=task["capability"]
+                        arguments=selected_args
                     )
                     executed_tool_name = final_tool
                     executed_args = final_args
@@ -165,14 +171,15 @@ def main():
                     minimal_privilege=min_priv,
                     fault_injected=fault_injected,
                     panic_escalated=panic_escalated,
-                    latency_ms=latency
+                    latency_ms=latency,
+                    execution_backend=t1_output.mode
                 )
                 all_records.append(record)
 
     # Compute Summary
     summary_df = BenchmarkMetrics.compute_summary(all_records)
     print("\n" + "="*80)
-    print("REAL EMPIRICAL EVALUATION RESULTS:")
+    print("EVALUATION RESULTS SUMMARY:")
     print("="*80)
     print(summary_df.to_string(index=False))
 

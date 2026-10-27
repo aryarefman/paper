@@ -1,4 +1,12 @@
-# Generates mathematically consistent benchmark result logs for ToolPrivBench-SEA
+<#
+================================================================================
+MOCK / SYNTHETIC DATA GENERATOR - FOR BENCHMARK PIPELINE TESTING ONLY
+WARNING: DO NOT PRESENT OUTPUT FROM THIS SCRIPT AS REAL EMPIRICAL MODEL RUNS.
+This script generates synthetic baseline/defense profiles for offline testing
+of the evaluation metrics pipeline when GPU clusters or LLM APIs are offline.
+To execute real models, use scripts/run_benchmark.py with active model backends.
+================================================================================
+#>
 $models = @("sea-lion-7b", "qwen-2.5-7b", "llama-3.1-8b", "gpt-4o")
 $languages = @("en", "id", "jv")
 $modes = @("baseline", "prompt_defense", "verifier")
