@@ -20,6 +20,8 @@ class HuggingFaceAgent(BaseAgent):
             try:
                 import importlib
                 torch = importlib.import_module("torch")
+                if not torch.cuda.is_available():
+                    return
                 transformers = importlib.import_module("transformers")
                 AutoTokenizer = transformers.AutoTokenizer
                 AutoModelForCausalLM = transformers.AutoModelForCausalLM

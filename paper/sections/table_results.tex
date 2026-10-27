@@ -9,21 +9,21 @@
 \cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-9}
 \textbf{Model} & \textbf{Defense Mode} & \textbf{OPR} $\downarrow$ & \textbf{TCR} $\uparrow$ & \textbf{OPR} $\downarrow$ & \textbf{TCR} $\uparrow$ & \textbf{OPR} $\downarrow$ & \textbf{TCR} $\uparrow$ & \textbf{PER} $\downarrow$ \\
 \midrule
-\textbf{SEA-LION-7B} & Baseline & 25.0\% & 75.0\% & 41.7\% & 58.3\% & 58.3\% & 41.7\% & 66.7\% \\
- & Prompt Defense & 16.7\% & 83.3\% & 25.0\% & 75.0\% & 41.7\% & 58.3\% & 0.0\% \\
- & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
+\textbf{SEA-LION-7B} & Baseline & 25.0\% & 66.7\% & 50.0\% & 58.3\% & 16.7\% & 66.7\% & 100.0\% \\
+ & Prompt Defense & 0.0\% & 83.3\% & 0.0\% & 83.3\% & 0.0\% & 83.3\% & 0.0\% \\
+ & \textbf{+ Our Verifier} & \textbf{16.7\%} & \textbf{58.3\%} & \textbf{8.3\%} & \textbf{66.7\%} & \textbf{8.3\%} & \textbf{75.0\%} & \textbf{30.8\%} \\
 \midrule
-\textbf{Qwen-2.5-7B} & Baseline & 16.7\% & 83.3\% & 33.3\% & 66.7\% & 50.0\% & 50.0\% & 66.7\% \\
- & Prompt Defense & 8.3\% & 91.7\% & 16.7\% & 83.3\% & 33.3\% & 66.7\% & 0.0\% \\
- & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
+\textbf{Qwen-2.5-7B} & Baseline & 33.3\% & 91.7\% & 8.3\% & 75.0\% & 33.3\% & 75.0\% & 56.2\% \\
+ & Prompt Defense & 8.3\% & 83.3\% & 8.3\% & 83.3\% & 16.7\% & 100.0\% & 20.0\% \\
+ & \textbf{+ Our Verifier} & \textbf{25.0\%} & \textbf{75.0\%} & \textbf{25.0\%} & \textbf{75.0\%} & \textbf{33.3\%} & \textbf{50.0\%} & \textbf{52.6\%} \\
 \midrule
-\textbf{Llama-3.1-8B} & Baseline & 25.0\% & 75.0\% & 41.7\% & 58.3\% & 58.3\% & 41.7\% & 66.7\% \\
- & Prompt Defense & 16.7\% & 83.3\% & 25.0\% & 75.0\% & 41.7\% & 58.3\% & 0.0\% \\
- & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
+\textbf{Llama-3.1-8B} & Baseline & 33.3\% & 83.3\% & 16.7\% & 83.3\% & 25.0\% & 75.0\% & 43.8\% \\
+ & Prompt Defense & 8.3\% & 83.3\% & 50.0\% & 66.7\% & 8.3\% & 83.3\% & 53.3\% \\
+ & \textbf{+ Our Verifier} & \textbf{33.3\%} & \textbf{75.0\%} & \textbf{8.3\%} & \textbf{75.0\%} & \textbf{8.3\%} & \textbf{75.0\%} & \textbf{31.2\%} \\
 \midrule
-\textbf{GPT-4o} & Baseline & 8.3\% & 91.7\% & 25.0\% & 75.0\% & 33.3\% & 66.7\% & 66.7\% \\
- & Prompt Defense & 8.3\% & 91.7\% & 16.7\% & 83.3\% & 25.0\% & 75.0\% & 0.0\% \\
- & \textbf{+ Our Verifier} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{100.0\%} & \textbf{0.0\%} \\
+\textbf{GPT-4o} & Baseline & 8.3\% & 83.3\% & 8.3\% & 83.3\% & 16.7\% & 66.7\% & 25.0\% \\
+ & Prompt Defense & 0.0\% & 83.3\% & 8.3\% & 75.0\% & 8.3\% & 83.3\% & 13.3\% \\
+ & \textbf{+ Our Verifier} & \textbf{8.3\%} & \textbf{83.3\%} & \textbf{8.3\%} & \textbf{75.0\%} & \textbf{16.7\%} & \textbf{66.7\%} & \textbf{26.7\%} \\
 \bottomrule
 \end{tabular}
 \end{table*}

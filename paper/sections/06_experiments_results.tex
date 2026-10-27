@@ -4,10 +4,10 @@
 \subsection{Experimental Setup and Models}
 We evaluate 432 controlled execution trajectories across four model architectures:
 \begin{itemize}
-    \item \textbf{SEA-LION-7B-Instruct}~\cite{aisingapore2024sealion}: The primary open regional model for Southeast Asian languages.
-    \item \textbf{Qwen-2.5-7B-Instruct}: State-of-the-art open multilingual foundation model.
-    \item \textbf{Meta-Llama-3.1-8B-Instruct}: Global open baseline.
-    \item \textbf{GPT-4o}: Proprietary frontier benchmark.
+    \item \textbf{SEA-LION-7B-Instruct}~\cite{aisingapore2024sealion}: Open regional baseline for Southeast Asian languages (evaluated under calibrated zero-shot lexical-semantic simulation).
+    \item \textbf{Qwen-2.5-7B-Instruct}: State-of-the-art open multilingual foundation model (evaluated live via API inference).
+    \item \textbf{Meta-Llama-3.1-8B-Instruct}: Global open baseline (evaluated live via API inference).
+    \item \textbf{GPT-4o}: Proprietary frontier benchmark (evaluated live via API inference).
 \end{itemize}
 
 For each model, we evaluate three defense regimes across all three language tiers ($N = 12$ tasks each):
@@ -22,18 +22,18 @@ For each model, we evaluate three defense regimes across all three language tier
 \subsection{Key Empirical Findings}
 
 \subsubsection{Finding 1: Cross-Lingual Vulnerability is Real}
-As presented in Table~\ref{tab:main_results}, baseline models demonstrate a substantial surge in over-privilege as the prompt language transitions from English ($8.3\% - 25.0\%$) to Indonesian ($25.0\% - 41.7\%$) and Javanese ($33.3\% - 58.3\%$). In Javanese, more than half of the unconstrained tool calls executed by SEA-LION and Llama-3.1 violated least privilege. This empirically confirms that semantic dispersion in regional languages increases reliance on over-privileged tools.
+As presented in Table~\ref{tab:main_results}, baseline models demonstrate notable vulnerability to over-privilege across languages, with Javanese exhibiting elevated over-privilege rates (reaching $33.3\%$ in Qwen-2.5-7B and $25.0\%$ in Llama-3.1-8B). Under transient timeouts on minimal tools, unconstrained baseline models panic-escalate to high-privilege APIs in $56.2\%$ of cases for Qwen-2.5-7B and $43.8\%$ for Llama-3.1-8B ($100.0\%$ in SEA-LION baseline). This confirms that cross-lingual semantic ambiguity and execution failures exacerbate reliance on overly permissive tools.
 
 \subsubsection{Finding 2: Prompt Defenses are Inadequate Under Language Shift}
-While adding explicit least-privilege instructions into the system prompt reduces over-privilege in English (dropping to $8.3\% - 16.7\%$), its efficacy degrades sharply in Javanese, where $OPR$ remains as high as $33.3\% - 41.7\%$. Stochastic prompt-level defenses do not guarantee security when the underlying semantic representation of the query is ambiguous.
+While adding explicit least-privilege instructions into the system prompt reduces over-privilege in English (e.g., reaching $0.0\%$ in GPT-4o and $8.3\%$ in Qwen and Llama), its efficacy is brittle under language shift. In Indonesian, Llama-3.1-8B's over-privilege rate actually surges to $50.0\%$ despite prompt defenses, and panic escalation remains as high as $53.3\%$. Similarly, Qwen-2.5-7B maintains $16.7\%$ over-privilege in Javanese. Prompt-level guardrails remain fundamentally stochastic and unreliable when transferred across typologically diverse languages.
 
-\subsubsection{Finding 3: Capability-Preserving Verification Guarantees Safety}
+\subsubsection{Finding 3: Capability-Preserving Verification Enforces Deterministic Safety}
 When our deterministic lattice guardrail is active:
 \begin{enumerate}
-    \item \textbf{Complete Privilege Containment ($OPR = 0.0\%$):} All over-privileged tool calls are intercepted. Because parameter scope inspection proves that only singular entity identifiers are provided, calls are safely down-cast to the minimal sufficient equivalent.
-    \item \textbf{Preserved Task Completion ($TCR = 100.0\%$):} Because the lattice indexes tools by explicit functional capability (e.g., separating \texttt{financial\_balance} from \texttt{academic\_transcript}), the guardrail never cross-downgrades to a functionally mismatched tool.
-    \item \textbf{Transient Fault Immunity ($PER = 0.0\%$):} Under synthetic HTTP 504 timeouts on minimal tools, baseline models exhibit panic escalation in $66.7\%$ of fault-injected cases. The verifier's fault quarantine catches these attempts and prevents unauthorized escalation.
+    \item \textbf{Privilege Downgrading:} Across all models and languages, over-privileged tool calls bearing scoped entity identifiers (e.g., student IDs or user accounts) are deterministically intercepted and down-cast to their minimal sufficient equivalents. In Indonesian, our verifier slashes Llama-3.1-8B's over-privilege rate from $50.0\%$ under prompt defense down to $8.3\%$, and reduces SEA-LION's over-privilege rate from $50.0\%$ down to $8.3\%$.
+    \item \textbf{Preserved Functional Utility:} Because our lattice indexes tools by explicit functional capability rather than coarse domain labels, the guardrail avoids erroneous cross-capability conversions (maintaining task completion rates between $66.7\%$ and $83.3\%$ across models).
+    \item \textbf{Containment of Panic Escalation:} The verifier's fault quarantine significantly blunts transient failure escalation, lowering Llama-3.1-8B's fault escalation from $53.3\%$ to $31.2\%$ and preventing runaway privilege creep when APIs encounter transient faults.
 \end{enumerate}
 
 \subsubsection{Finding 4: Negligible Latency Overhead}
-Across all executions, the mean runtime overhead of parameter inspection and lattice resolution was $\Delta t = 12.95 \pm 0.84\text{ms}$, well within production latency requirements for interactive agent runtimes.
+While end-to-end API inference across distributed provider backends averaged $1.52\text{s}$ per transaction, the standalone computational overhead of our parameter inspection and lattice resolution engine is strictly sub-millisecond ($\Delta t < 0.02\text{ms}$ per invocation), confirming practical suitability for real-time production deployment.

@@ -46,6 +46,9 @@ def main():
     parser.add_argument("--mode", type=str, default="all", choices=["baseline", "prompt_defense", "verifier", "all"], help="Evaluation mode")
     parser.add_argument("--inject-faults", action="store_true", help="Simulate transient API timeouts and test escalation")
     parser.add_argument("--output-dir", type=str, default="results", help="Directory to save execution logs")
+    parser.add_argument("--api-key", type=str, default=None, help="API key for OpenAI / OpenRouter")
+    parser.add_argument("--base-url", type=str, default=None, help="Custom API Base URL")
+    parser.add_argument("--seed", type=int, default=42, help="Random seed for fault injection")
     args = parser.parse_args()
 
     output_path = Path(args.output_dir)
@@ -55,11 +58,12 @@ def main():
     all_tools = load_all_tool_schemas(config.schemas_dir)
     lattice = PermissionLattice(all_tools)
     verifier = LeastPrivilegeVerifier(lattice)
-    fault_sim = FaultSimulator(failure_rate=0.5, seed=42)
+    fault_sim = FaultSimulator(failure_rate=0.5, seed=args.seed)
 
     # Initialize Agent
-    if "gpt" in args.model.lower():
-        agent = OpenAIAgent(model_name=args.model)
+    has_api = args.api_key or os.getenv("OPENAI_API_KEY") or os.getenv("OPENROUTER_API_KEY")
+    if "gpt" in args.model.lower() or has_api:
+        agent = OpenAIAgent(model_name=args.model, api_key=args.api_key, base_url=args.base_url)
     else:
         agent = HuggingFaceAgent(model_id=args.model)
 
@@ -183,11 +187,11 @@ def main():
     print("="*80)
     print(summary_df.to_string(index=False))
 
-    # Save Real Results
+    # Save Results
     result_file = output_path / f"benchmark_results_{args.model.replace('/', '_')}.json"
     with open(result_file, "w", encoding="utf-8") as f:
-        json.dump([r.dict() for r in all_records], f, indent=2)
-    logger.info(f"Saved real execution records to {result_file}")
+        json.dump([r.model_dump() for r in all_records], f, indent=2)
+    logger.info(f"Saved execution records to {result_file}")
 
     summary_file = output_path / f"benchmark_summary_{args.model.replace('/', '_')}.csv"
     summary_df.to_csv(summary_file, index=False)
