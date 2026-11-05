@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><title>Kerangka Judul dan Bab 1.1</title>
+<style>
+@page { size: A4; margin: 22mm 20mm; }
+body { font: 11pt/1.5 'Times New Roman', serif; color: #111; }
+h1 { font-size: 15pt; margin: 0 0 4px; } h2 { font-size: 12.5pt; margin: 18px 0 6px; }
+.note { border: 1px solid #999; padding: 8px 10px; background: #f6f6f6; font-size: 10pt; }
+table { border-collapse: collapse; width: 100%; font-size: 10pt; } th, td { border: 1px solid #777; padding: 5px 6px; vertical-align: top; text-align: left; }
+th { background: #eee; } li { margin-bottom: 3px; }
+</style></head><body>
+<h1>Kerangka Judul dan Bab 1.1 Latar Belakang</h1>
+<div>Penulisan Ilmiah (A), Week 10. Batas kumpul: Jumat, 6 November 2026, 09.00. Mahasiswa: Arya Bisma Putra Refman (5027241036).</div>
+<p class="note"><b>Catatan:</b> Ini bahan dan kerangka, bukan paragraf jadi. Aturan kelas (slide 33, Bu Rizka): AI boleh untuk brainstorming dan memperhalus paragraf, tidak untuk membuat isi proposal. Paragraf Bab 1.1 ditulis sendiri dengan kata-kata penulis, lalu boleh dihaluskan.</p>
+
+<h2>1. Judul</h2>
+<p><b>Pengukuran Pemilihan Tool Berlebih Hak Akses pada Agen LLM Multibahasa: Studi Kasus Bahasa Indonesia</b></p>
+<ul>
+<li>Tidak menyebut metode spesifik (slide 9, 15).</li>
+<li>Masalah nyata, spesifik, terukur lewat OPR, TCR, dan PER per bahasa (slide 6-11).</li>
+<li>Tidak overclaim (slide 14): kata "Pengukuran" dipilih karena hasil verifier di repo belum signifikan.</li>
+<li>Tidak bentrok dengan judul teman di sheet "Pendataan Judul TA". Terdekat: #38, #17, #25, #27; masalah dan metriknya berbeda.</li>
+<li>Topik tidak ada di sheet "Tawaran Judul TA": konfirmasi ke dosen (Cybersecurity &amp; Privacy: Pak Hatma, Pak Ridho, Pak Fuad; atau AI &amp; Data Science: Bu Rizka, Pak Irzal).</li>
+</ul>
+
+<h2>2. Struktur Bab 1.1 (slide 17-21, pedoman hal. 7)</h2>
+<p>Urutan: umum, khusus, gap, solusi di paragraf terakhir. Objek dijelaskan konkret, disertai alasan penting secara teoritis dan praktis. Hindari konteks yang terlalu jauh.</p>
+<table>
+<tr><th>Paragraf</th><th>Isi yang harus ada</th><th>Bahan bersumber (verifikasi sendiri)</th></tr>
+<tr><td>1. Permasalahan umum (pendek)</td><td>Agen LLM memanggil tool atau API sungguhan (database, shell, berkas), sehingga kesalahan memilih tool berdampak nyata.</td><td>Yang et al. (2026), arXiv:2606.20023</td></tr>
+<tr><td>2. Permasalahan khusus</td><td>Over-privileged tool selection: agen memilih tool berhak tinggi padahal yang rendah cukup, dan memburuk setelah kegagalan sementara. ToolPrivBench: 544 skenario, 8 domain, 11 model.</td><td>Yang et al. (2026). Angka per model (mis. Qwen3-8B 64,9%) dari sumber sekunder: wajib cek di PDF asli.</td></tr>
+<tr><td>3. Research gap</td><td>(a) Evaluasi sumber tidak menyatakan bahasa evaluasi, praktis Inggris. (b) Mitigasinya post-training, butuh akses model. (c) Belum ada pengukuran untuk instruksi berbahasa Indonesia.</td><td>Pencarian awal belum menemukan studi multibahasa untuk masalah ini, tetapi bukti lemah (hanya WebSearch). Cek Google Scholar atau ACL Anthology; jangan tulis "pertama".</td></tr>
+<tr><td>4. Solusi (paragraf terakhir)</td><td>Membangun benchmark tiga bahasa (Inggris, Indonesia, Jawa) dan mengukur OPR, TCR, PER pada baseline, prompt defense, dan verifier runtime.</td><td>Data repo: 36 task (12 per bahasa), 4 model.</td></tr>
+</table>
+<p><b>Pembanding terdekat untuk paragraf 3</b> (buka tiap halaman sebelum mengutip): MAPS (Hofman dkk., EACL 2026 Findings, 11 bahasa); Lumen-bench (arXiv:2610.15134, 5 bahasa, fokus aksi berbahaya); Lost in Execution (arXiv:2601.05366, ACL 2026); mitigasi pembanding: MiniScope (Zhu dkk., arXiv Des 2025) dan arXiv:2610.40975 (training-free).</p>
+
+<h2>3. Angka dari data sendiri (hitung ulang dari results/*.json)</h2>
+<ul>
+<li>Baseline OPR gabungan 22,9% [CI 95%: 16,8-30,4]. Per bahasa: Inggris 25,0%, Indonesia 20,8%, Jawa 22,9%, CI saling tumpang tindih. Jangan menulis bahwa bahasa daerah memperburuk masalah.</li>
+<li>Verifier: OPR 16,7%, TCR 70,8%, tidak signifikan terhadap baseline (p=0,20). Jangan menjanjikan mitigasi.</li>
+<li>SEA-LION: 108 dari 108 run adalah simulasi. Jangan disebut hasil model nyata.</li>
+</ul>
+
+<h2>4. Jebakan umum (slide 3, 13-15, 33)</h2>
+<ul>
+<li>Hanya mengikuti saran AI tanpa memahami problem: setiap kalimat harus bisa dijelaskan.</li>
+<li>Overclaim dan klaim "100% baru" atau "pertama".</li>
+<li>Dataset harus ada dan terjangkau waktu (baru 36 task; rencana perluasan 100+ per bahasa).</li>
+<li>Semua referensi dikutip, format APA edisi 7, pakai reference manager, minim blog dan berita, riset maksimal 5 tahun terakhir.</li>
+<li>Istilah asing dicetak miring; hindari kalimat majemuk bertingkat yang panjang.</li>
+</ul>
+
+<h2>5. Langkah penyelesaian</h2>
+<ol>
+<li>Buka Template-Proposal-TA-DTI.docx, isi sampul, judul, lalu Bab 1.1.</li>
+<li>Tulis 4 paragraf sendiri mengikuti tabel di atas (sekitar 1-1,5 halaman).</li>
+<li>Baca PDF Yang et al. dan 3-4 pembanding; ambil kutipan dan angka dari sumber asli.</li>
+<li>Susun sitasi APA 7 lewat Zotero.</li>
+<li>Kirim draf paragraf untuk dihaluskan, lalu submit sebelum Jumat 09.00.</li>
+</ol>
+</body></html>

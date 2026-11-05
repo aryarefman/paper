@@ -1,0 +1,181 @@
+- generic [ref=f2e1]:
+  - generic:
+    - generic: Manager
+    - generic: Developer
+    - generic: Reviewer
+    - generic: QA
+    - generic: Researcher
+    - generic: Designer
+    - generic: DevOps
+    - generic: Writer
+    - generic: Analyst
+    - generic: Security
+  - generic:
+    - generic [ref=f2e4]:
+      - heading "Agent Office · paper" [level=1] [ref=f2e144]:
+        - text: Agent Office
+        - generic [ref=f2e145]: · paper
+      - paragraph [ref=f2e6]:
+        - button "live · Claude session connected" [expanded] [active] [ref=f2e146] [cursor=pointer]
+        - button "Claude off" [ref=f2e8] [cursor=pointer]
+        - button "Restart" [ref=f2e9] [cursor=pointer]
+    - generic [ref=f2e10]:
+      - button "Files" [ref=f2e11] [cursor=pointer]
+      - link "Offices" [ref=f2e12] [cursor=pointer]:
+        - /url: offices.html
+      - link "Edit team" [ref=f2e13] [cursor=pointer]:
+        - /url: setup.html#agents
+      - button "Phone" [ref=f2e15] [cursor=pointer]
+      - button "Notes" [ref=f2e16] [cursor=pointer]
+      - button "Setup" [ref=f2e17] [cursor=pointer]
+      - button "Look" [ref=f2e19] [cursor=pointer]
+      - button "EN · id" [ref=f2e20] [cursor=pointer]
+      - generic [ref=f2e21]:
+        - button "Live" [ref=f2e22] [cursor=pointer]
+        - button "Static" [ref=f2e23] [cursor=pointer]
+      - button "Music" [ref=f2e25] [cursor=pointer]
+      - button "Meet on task" [ref=f2e27] [cursor=pointer]
+  - generic [ref=f2e147]:
+    - heading "Connection" [level=2] [ref=f2e148]
+    - paragraph [ref=f2e149]:
+      - text: Project
+      - code [ref=f2e150]: C:\Users\arya4\paper
+      - text: · office 1.0.0-rc.2
+    - list [ref=f2e151]:
+      - listitem [ref=f2e152]:
+        - generic [ref=f2e153]: arya4/paper
+        - generic [ref=f2e154]: plugin 1.0.0-rc.2 · connected
+    - paragraph [ref=f2e155]: Tasks you type above go to the connected session.
+    - paragraph [ref=f2e156]:
+      - text: "Claude account:"
+      - code [ref=f2e157]: iconplustools@gmail.com (pro)
+  - complementary [ref=f2e29]:
+    - generic [ref=f2e30] [cursor=pointer]:
+      - generic [ref=f2e31]: Agents 10
+      - link "Add agent" [ref=f2e32]:
+        - /url: setup.html#agents
+    - generic [ref=f2e33]:
+      - button "Give a task" [ref=f2e34] [cursor=pointer]
+      - generic [ref=f2e35]:
+        - generic [ref=f2e158]: Current task
+        - generic [ref=f2e159]: No task yet. Give one and the team meets, then starts on it.
+    - generic [ref=f2e38]:
+      - generic [ref=f2e160] [cursor=pointer]:
+        - generic [ref=f2e161]:
+          - generic [ref=f2e163]:
+            - generic [ref=f2e164]: Manager
+            - generic [ref=f2e165]: Using mcp__plugin_playwright_playwright__brows
+            - code [ref=f2e166]: playwright_playwright__brows
+            - generic [ref=f2e167]:
+              - generic [ref=f2e168]:
+                - text: playwright_playwright brows
+                - generic [ref=f2e169]: "13"
+              - generic [ref=f2e170]:
+                - text: Bash
+                - generic [ref=f2e171]: "7"
+              - generic [ref=f2e172]:
+                - text: Read
+                - generic [ref=f2e173]: "2"
+              - generic [ref=f2e174]:
+                - text: Grep
+                - generic [ref=f2e175]: "1"
+          - generic [ref=f2e176]:
+            - text: Working
+            - generic [ref=f2e178]: 23 tools · 2.2M tokens
+        - text: CEO
+      - generic [ref=f2e179] [cursor=pointer]:
+        - generic [ref=f2e180]:
+          - generic [ref=f2e182]:
+            - generic [ref=f2e183]: Developer
+            - generic [ref=f2e184]: At desk
+          - generic [ref=f2e185]:
+            - text: Idle
+            - generic [ref=f2e187]: No activity yet
+        - text: Build
+      - generic [ref=f2e188] [cursor=pointer]:
+        - generic [ref=f2e189]:
+          - generic [ref=f2e191]:
+            - generic [ref=f2e192]: Reviewer
+            - generic [ref=f2e193]: At desk
+          - generic [ref=f2e194]:
+            - text: Idle
+            - generic [ref=f2e196]: No activity yet
+        - text: Build
+      - generic [ref=f2e197] [cursor=pointer]:
+        - generic [ref=f2e198]:
+          - generic [ref=f2e200]:
+            - generic [ref=f2e201]: QA
+            - generic [ref=f2e202]: At desk
+          - generic [ref=f2e203]:
+            - text: Idle
+            - generic [ref=f2e205]: No activity yet
+        - text: Build
+      - generic [ref=f2e206] [cursor=pointer]:
+        - generic [ref=f2e207]:
+          - generic [ref=f2e209]:
+            - generic [ref=f2e210]: Researcher
+            - generic [ref=f2e211]: At desk
+          - generic [ref=f2e212]:
+            - text: Idle
+            - generic [ref=f2e214]: No activity yet
+        - text: Grow
+      - generic [ref=f2e215] [cursor=pointer]:
+        - generic [ref=f2e216]:
+          - generic [ref=f2e218]:
+            - generic [ref=f2e219]: Designer
+            - generic [ref=f2e220]: At desk
+          - generic [ref=f2e221]:
+            - text: Idle
+            - generic [ref=f2e223]: No activity yet
+        - text: Design
+      - generic [ref=f2e224] [cursor=pointer]:
+        - generic [ref=f2e225]:
+          - generic [ref=f2e227]:
+            - generic [ref=f2e228]: DevOps
+            - generic [ref=f2e229]: At desk
+          - generic [ref=f2e230]:
+            - text: Idle
+            - generic [ref=f2e232]: No activity yet
+        - text: Build
+      - generic [ref=f2e233] [cursor=pointer]:
+        - generic [ref=f2e234]:
+          - generic [ref=f2e236]:
+            - generic [ref=f2e237]: Writer
+            - generic [ref=f2e238]: At desk
+          - generic [ref=f2e239]:
+            - text: Idle
+            - generic [ref=f2e241]: No activity yet
+        - text: Make
+      - generic [ref=f2e242] [cursor=pointer]:
+        - generic [ref=f2e243]:
+          - generic [ref=f2e245]:
+            - generic [ref=f2e246]: Analyst
+            - generic [ref=f2e247]: At desk
+          - generic [ref=f2e248]:
+            - text: Idle
+            - generic [ref=f2e250]: No activity yet
+        - text: Grow
+      - generic [ref=f2e251] [cursor=pointer]:
+        - generic [ref=f2e252]:
+          - generic [ref=f2e254]:
+            - generic [ref=f2e255]: Security
+            - generic [ref=f2e256]: At desk
+          - generic [ref=f2e257]:
+            - text: Idle
+            - generic [ref=f2e259]: No activity yet
+        - text: Build
+  - region "Task desk" [ref=f2e129]:
+    - generic [ref=f2e130]:
+      - generic [ref=f2e131]: Task desk
+      - button "Show" [ref=f2e132] [cursor=pointer]
+  - generic [ref=f2e133]:
+    - generic [ref=f2e134]: Working
+    - generic [ref=f2e136]: Thinking
+    - generic [ref=f2e138]: Idle
+    - generic [ref=f2e140]: Error
+    - generic [ref=f2e142]: Done
+  - generic: Press H to show the controls again
+  - generic:
+    - generic: Manager
+    - text: Verifying the panel now sits on top at 600px.
+  - generic: Green, I hope

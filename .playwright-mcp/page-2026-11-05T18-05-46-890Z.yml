@@ -1,0 +1,102 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic: Manager
+    - generic: Developer
+    - generic: Reviewer
+    - generic: QA
+    - generic: Researcher
+    - generic: Designer
+    - generic: DevOps
+    - generic: Writer
+    - generic: Analyst
+    - generic: Security
+  - generic:
+    - generic [ref=e4]:
+      - heading "Agent Office · paper" [level=1] [ref=e5]:
+        - text: Agent Office
+        - generic [ref=e6]: · paper
+      - paragraph [ref=e7]:
+        - button "live · no Claude session connected" [ref=e8] [cursor=pointer]
+        - button "Claude off" [ref=e9] [cursor=pointer]
+        - button "Restart" [ref=e10] [cursor=pointer]
+    - button "Menu" [ref=e11] [cursor=pointer]
+  - complementary [ref=e12]:
+    - generic [ref=e13]:
+      - button "Give a task" [ref=e14] [cursor=pointer]
+      - generic [ref=e15]:
+        - generic [ref=e16]: In progress
+        - generic [ref=e18]: "Saya tidak mengubah file apa pun, hanya membaca repo, xlsx, dan arXiv/situs NUS. Dua hal penting: \"perfect\" tidak bisa dijamin oleh judul, dan hasil eksperimen saat ini…"
+    - generic [ref=e19]:
+      - generic [ref=e20] [cursor=pointer]:
+        - generic [ref=e21]:
+          - generic [ref=e23]:
+            - generic [ref=e24]: Manager
+            - code [ref=e25]: playwright_playwright__brows http://127.0.0.1:7782/
+            - generic [ref=e26]:
+              - generic [ref=e27]:
+                - text: Bash
+                - generic [ref=e28]: "20"
+              - generic [ref=e29]:
+                - text: Edit
+                - generic [ref=e30]: "10"
+              - generic [ref=e31]:
+                - text: context-mode_context-mode c
+                - generic [ref=e32]: "7"
+              - generic [ref=e33]:
+                - text: Read
+                - generic [ref=e34]: "7"
+              - generic [ref=e35]: "+4"
+          - generic [ref=e36]: Working
+        - text: CEO
+      - generic [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]:
+          - generic [ref=e41]: Developer
+          - generic [ref=e43]: Idle
+        - text: Build
+      - generic [ref=e45] [cursor=pointer]:
+        - generic [ref=e46]:
+          - generic [ref=e48]: Reviewer
+          - generic [ref=e50]: Idle
+        - text: Build
+      - generic [ref=e52] [cursor=pointer]:
+        - generic [ref=e53]:
+          - generic [ref=e55]: QA
+          - generic [ref=e57]: Idle
+        - text: Build
+      - generic [ref=e59] [cursor=pointer]:
+        - generic [ref=e60]:
+          - generic [ref=e62]: Researcher
+          - generic [ref=e64]: Idle
+        - text: Grow
+      - generic [ref=e66] [cursor=pointer]:
+        - generic [ref=e67]:
+          - generic [ref=e69]: Designer
+          - generic [ref=e71]: Idle
+        - text: Design
+      - generic [ref=e73] [cursor=pointer]:
+        - generic [ref=e74]:
+          - generic [ref=e76]: DevOps
+          - generic [ref=e78]: Idle
+        - text: Build
+      - generic [ref=e80] [cursor=pointer]:
+        - generic [ref=e81]:
+          - generic [ref=e83]: Writer
+          - generic [ref=e85]: Idle
+        - text: Make
+      - generic [ref=e87] [cursor=pointer]:
+        - generic [ref=e88]:
+          - generic [ref=e90]: Analyst
+          - generic [ref=e92]: Idle
+        - text: Grow
+      - generic [ref=e94] [cursor=pointer]:
+        - generic [ref=e95]:
+          - generic [ref=e97]: Security
+          - generic [ref=e99]: Idle
+        - text: Build
+  - region "Task desk" [ref=e101]:
+    - generic [ref=e102]:
+      - generic [ref=e103]: Task desk
+      - button "Show" [ref=e104] [cursor=pointer]
+  - generic: Click an agent to ride along · click a monitor for its terminal · click the TV for the project · H hides the HUD
+  - generic: Press H to show the controls again
+  - generic: Nice

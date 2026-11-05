@@ -1,0 +1,37 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - link "Agent Office" [ref=e4] [cursor=pointer]:
+      - /url: ./
+    - link "← This office" [ref=e6] [cursor=pointer]:
+      - /url: ./
+  - main [ref=e7]:
+    - generic [ref=e8]:
+      - paragraph [ref=e9]: Offices
+      - heading "Your offices" [level=1] [ref=e10]
+      - paragraph [ref=e11]: "Every project is one floor: the more projects, the taller the building. Open a floor to watch that team."
+    - generic [ref=e12]:
+      - paragraph [ref=e16]: Drag to turn the building · click a floor to open it · the flag marks this office
+      - generic [ref=e17]:
+        - list [ref=e18]:
+          - listitem [ref=e19]:
+            - link "1 proj C:\\Users\\arya4\\AppData\\Local\\Temp\\claude\\02a797239393aad6\\05617f1f-0a40-4d6e-a902-fd29ce8be93c\\scratchpad\\ft\\proj 0 agents all idle no session Warm studio You are here" [ref=e20] [cursor=pointer]:
+              - /url: http://127.0.0.1:8910/?k=oTqKZ927hTFDfCKhsT0uhIxabs15a609vesJxKsm_RM
+              - generic [ref=e21]: "1"
+              - generic [ref=e23]:
+                - heading "proj" [level=2] [ref=e24]
+                - paragraph [ref=e25]: C:\Users\arya4\AppData\Local\Temp\claude\02a797239393aad6\05617f1f-0a40-4d6e-a902-fd29ce8be93c\scratchpad\ft\proj
+                - generic [ref=e26]:
+                  - generic [ref=e27]: 0 agents
+                  - generic [ref=e28]: all idle
+                  - generic [ref=e29]: no session
+                  - generic [ref=e30]: Warm studio
+                - generic [ref=e31]: You are here
+            - button "Repos of proj" [ref=e32] [cursor=pointer]: Repos
+            - button "Rename proj" [ref=e33] [cursor=pointer]: Rename
+        - paragraph [ref=e34]:
+          - text: This is the only office running. Start one for another project with
+          - code [ref=e35]: npx github:niklan1110/agentic-office
+          - text: in that project's folder, and it shows up here.
+  - button "EN · id" [ref=e36] [cursor=pointer]

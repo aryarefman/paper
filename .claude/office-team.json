@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "launchedAt": 1793902818985,
+  "manager": {
+    "name": "Manager",
+    "skills": [
+      "dispatching-parallel-agents",
+      "verification-before-completion"
+    ]
+  },
+  "agents": [
+    {
+      "id": "literature-researcher",
+      "name": "Literature Researcher",
+      "character": "researcher",
+      "description": "[Run] Verifikasi referensi di references.bib, resources/ dan paper/ lewat web, cek celah riset terhadap arXiv:2606.20023 dan paper multibahasa lain. Serahkan: tugas sitasi, kebaruan, dan riset judul.",
+      "model": "inherit",
+      "skills": [
+        "research"
+      ]
+    },
+    {
+      "id": "results-analyst",
+      "name": "Results Analyst",
+      "character": "analyst",
+      "description": "[Build] Hitung ulang OPR/TCR/PER dari results/*.json|csv dan dataset/, bandingkan dengan abstrak, README, tabel LaTeX, tambah confidence interval. Serahkan: tugas angka, benchmark, statistik.",
+      "model": "inherit",
+      "skills": [
+        "statistical-analysis",
+        "validate-data"
+      ]
+    },
+    {
+      "id": "paper-writer",
+      "name": "Paper Writer",
+      "character": "writer",
+      "description": "[Make] Tulis ulang abstrak dan klaim di paper/*.tex, README.md, title_list.md agar sesuai hasil nyata; susun judul NUS dan TA. Serahkan: tugas tulisan dan judul.",
+      "model": "inherit",
+      "skills": [
+        "writing-guidelines"
+      ]
+    },
+    {
+      "id": "integrity-reviewer",
+      "name": "Integrity Reviewer",
+      "character": "reviewer",
+      "description": "[Build] Review src/, scripts/, tests/ untuk konsistensi klaim vs kode: verifier, execution_backend simulated, klaim latensi. Serahkan: tugas review kode dan integritas klaim.",
+      "model": "inherit",
+      "skills": [
+        "ponytail-review",
+        "security-audit"
+      ]
+    }
+  ],
+  "summaries": {
+    "dispatching-parallel-agents": "Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies",
+    "verification-before-completion": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output b…",
+    "research": "Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo.",
+    "statistical-analysis": "Apply statistical methods including descriptive stats, trend analysis, outlier detection, and hypothesis testing.",
+    "validate-data": "QA an analysis before sharing -- methodology, accuracy, and bias checks.",
+    "writing-guidelines": "Review docs/prose for Writing Guidelines compliance.",
+    "ponytail-review": "Quality review of a change: is the logic right, is it safe, does it hold under real load, is risky code tested, is it fast enough, and is every line needed.",
+    "security-audit": "Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons."
+  }
+}

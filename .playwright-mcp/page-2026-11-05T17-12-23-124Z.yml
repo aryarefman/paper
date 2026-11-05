@@ -1,0 +1,14 @@
+- generic [active] [ref=f1e1]:
+  - link "Skip to content" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f1e3]:
+    - link "Agent Office" [ref=f1e4] [cursor=pointer]:
+      - /url: ./
+    - link "← This office" [ref=f1e6] [cursor=pointer]:
+      - /url: ./
+  - main [ref=f1e7]:
+    - generic [ref=f1e8]:
+      - paragraph [ref=f1e9]: Offices
+      - heading "Your offices" [level=1] [ref=f1e10]
+      - paragraph [ref=f1e11]: "Every project is one floor: the more projects, the taller the building. Open a floor to watch that team."
+  - button "EN · id" [ref=f1e13] [cursor=pointer]

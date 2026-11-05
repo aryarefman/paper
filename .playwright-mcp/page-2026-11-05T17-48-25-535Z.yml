@@ -1,0 +1,115 @@
+- generic [ref=f1e1]:
+  - generic:
+    - generic: Manager
+    - generic: Developer
+    - generic: Reviewer
+    - generic: QA
+    - generic: Researcher
+    - generic: Designer
+    - generic: DevOps
+    - generic: Writer
+    - generic: Analyst
+    - generic: Security
+  - generic:
+    - generic [ref=f1e4]:
+      - heading "Agent Office · paper" [level=1] [ref=f1e92]:
+        - text: Agent Office
+        - generic [ref=f1e93]: · paper
+      - paragraph [ref=f1e6]:
+        - button "live · Claude session connected" [expanded] [active] [ref=f1e94] [cursor=pointer]
+        - button "Claude off" [ref=f1e8] [cursor=pointer]
+        - button "Restart" [ref=f1e9] [cursor=pointer]
+    - button "Menu" [ref=f1e10] [cursor=pointer]
+  - generic [ref=f1e95]:
+    - heading "Connection" [level=2] [ref=f1e96]
+    - paragraph [ref=f1e97]:
+      - text: Project
+      - code [ref=f1e98]: C:\Users\arya4\paper
+      - text: · office 1.0.0-rc.2
+    - list [ref=f1e99]:
+      - listitem [ref=f1e100]:
+        - generic [ref=f1e101]: arya4/paper
+        - generic [ref=f1e102]: plugin 1.0.0-rc.2 · connected
+    - paragraph [ref=f1e103]: Tasks you type above go to the connected session.
+    - paragraph [ref=f1e104]:
+      - text: "Claude account:"
+      - code [ref=f1e105]: iconplustools@gmail.com (pro)
+  - complementary [ref=f1e11]:
+    - generic [ref=f1e12]:
+      - button "Give a task" [ref=f1e13] [cursor=pointer]
+      - generic [ref=f1e14]:
+        - generic [ref=f1e106]: Current task
+        - generic [ref=f1e107]: No task yet. Give one and the team meets, then starts on it.
+    - generic [ref=f1e17]:
+      - generic [ref=f1e108] [cursor=pointer]:
+        - generic [ref=f1e109]:
+          - generic [ref=f1e111]:
+            - generic [ref=f1e112]: Manager
+            - code [ref=f1e113]: playwright_playwright__brows
+            - generic [ref=f1e114]:
+              - generic [ref=f1e115]:
+                - text: playwright_playwright brows
+                - generic [ref=f1e116]: "8"
+              - generic [ref=f1e117]:
+                - text: Bash
+                - generic [ref=f1e118]: "6"
+              - generic [ref=f1e119]:
+                - text: Read
+                - generic [ref=f1e120]: "2"
+              - generic [ref=f1e121]:
+                - text: Grep
+                - generic [ref=f1e122]: "1"
+          - generic [ref=f1e123]: Working
+        - text: CEO
+      - generic [ref=f1e125] [cursor=pointer]:
+        - generic [ref=f1e126]:
+          - generic [ref=f1e128]: Developer
+          - generic [ref=f1e130]: Idle
+        - text: Build
+      - generic [ref=f1e132] [cursor=pointer]:
+        - generic [ref=f1e133]:
+          - generic [ref=f1e135]: Reviewer
+          - generic [ref=f1e137]: Idle
+        - text: Build
+      - generic [ref=f1e139] [cursor=pointer]:
+        - generic [ref=f1e140]:
+          - generic [ref=f1e142]: QA
+          - generic [ref=f1e144]: Idle
+        - text: Build
+      - generic [ref=f1e146] [cursor=pointer]:
+        - generic [ref=f1e147]:
+          - generic [ref=f1e149]: Researcher
+          - generic [ref=f1e151]: Idle
+        - text: Grow
+      - generic [ref=f1e153] [cursor=pointer]:
+        - generic [ref=f1e154]:
+          - generic [ref=f1e156]: Designer
+          - generic [ref=f1e158]: Idle
+        - text: Design
+      - generic [ref=f1e160] [cursor=pointer]:
+        - generic [ref=f1e161]:
+          - generic [ref=f1e163]: DevOps
+          - generic [ref=f1e165]: Idle
+        - text: Build
+      - generic [ref=f1e167] [cursor=pointer]:
+        - generic [ref=f1e168]:
+          - generic [ref=f1e170]: Writer
+          - generic [ref=f1e172]: Idle
+        - text: Make
+      - generic [ref=f1e174] [cursor=pointer]:
+        - generic [ref=f1e175]:
+          - generic [ref=f1e177]: Analyst
+          - generic [ref=f1e179]: Idle
+        - text: Grow
+      - generic [ref=f1e181] [cursor=pointer]:
+        - generic [ref=f1e182]:
+          - generic [ref=f1e184]: Security
+          - generic [ref=f1e186]: Idle
+        - text: Build
+  - region "Task desk" [ref=f1e88]:
+    - generic [ref=f1e89]:
+      - generic [ref=f1e90]: Task desk
+      - button "Show" [ref=f1e91] [cursor=pointer]
+  - generic: Click an agent to ride along · click a monitor for its terminal · click the TV for the project · H hides the HUD
+  - generic: Press H to show the controls again
+  - generic: Waiting on the Manager

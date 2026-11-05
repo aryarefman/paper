@@ -1,0 +1,83 @@
+- generic [active] [ref=f1e1]:
+  - generic:
+    - generic: Manager
+    - generic: Developer
+    - generic: Reviewer
+    - generic: QA
+    - generic: Researcher
+    - generic: Designer
+    - generic: DevOps
+    - generic: Writer
+    - generic: Analyst
+    - generic: Security
+  - generic:
+    - generic [ref=f1e4]:
+      - heading "Agent Office" [level=1] [ref=f1e5]: Agent Office ·
+      - paragraph [ref=f1e6]:
+        - button "connecting…" [ref=f1e7] [cursor=pointer]
+        - button "Claude off" [ref=f1e8] [cursor=pointer]
+        - button "Restart" [ref=f1e9] [cursor=pointer]
+    - button "Menu" [ref=f1e10] [cursor=pointer]
+  - complementary [ref=f1e11]:
+    - generic [ref=f1e12]:
+      - button "Give a task" [ref=f1e13] [cursor=pointer]
+      - generic [ref=f1e14]:
+        - generic [ref=f1e15]: Current task
+        - generic [ref=f1e16]: No task yet. Give one and the team meets, then starts on it.
+    - generic [ref=f1e17]:
+      - generic [ref=f1e18] [cursor=pointer]:
+        - generic [ref=f1e19]:
+          - generic [ref=f1e21]: Manager
+          - generic [ref=f1e23]: Idle
+        - text: CEO
+      - generic [ref=f1e25] [cursor=pointer]:
+        - generic [ref=f1e26]:
+          - generic [ref=f1e28]: Developer
+          - generic [ref=f1e30]: Idle
+        - text: Build
+      - generic [ref=f1e32] [cursor=pointer]:
+        - generic [ref=f1e33]:
+          - generic [ref=f1e35]: Reviewer
+          - generic [ref=f1e37]: Idle
+        - text: Build
+      - generic [ref=f1e39] [cursor=pointer]:
+        - generic [ref=f1e40]:
+          - generic [ref=f1e42]: QA
+          - generic [ref=f1e44]: Idle
+        - text: Build
+      - generic [ref=f1e46] [cursor=pointer]:
+        - generic [ref=f1e47]:
+          - generic [ref=f1e49]: Researcher
+          - generic [ref=f1e51]: Idle
+        - text: Grow
+      - generic [ref=f1e53] [cursor=pointer]:
+        - generic [ref=f1e54]:
+          - generic [ref=f1e56]: Designer
+          - generic [ref=f1e58]: Idle
+        - text: Design
+      - generic [ref=f1e60] [cursor=pointer]:
+        - generic [ref=f1e61]:
+          - generic [ref=f1e63]: DevOps
+          - generic [ref=f1e65]: Idle
+        - text: Build
+      - generic [ref=f1e67] [cursor=pointer]:
+        - generic [ref=f1e68]:
+          - generic [ref=f1e70]: Writer
+          - generic [ref=f1e72]: Idle
+        - text: Make
+      - generic [ref=f1e74] [cursor=pointer]:
+        - generic [ref=f1e75]:
+          - generic [ref=f1e77]: Analyst
+          - generic [ref=f1e79]: Idle
+        - text: Grow
+      - generic [ref=f1e81] [cursor=pointer]:
+        - generic [ref=f1e82]:
+          - generic [ref=f1e84]: Security
+          - generic [ref=f1e86]: Idle
+        - text: Build
+  - region "Task desk" [ref=f1e88]:
+    - generic [ref=f1e89]:
+      - generic [ref=f1e90]: Task desk
+      - button "Show" [ref=f1e91] [cursor=pointer]
+  - generic: Click an agent to ride along · click a monitor for its terminal · click the TV for the project · H hides the HUD
+  - generic: Press H to show the controls again
